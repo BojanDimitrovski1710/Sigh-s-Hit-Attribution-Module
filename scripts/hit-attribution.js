@@ -122,6 +122,25 @@ function detectShieldSpellBonus(actor) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// BARKSKIN / AC MINIMUM DETECTION
+// Barkskin sets system.attributes.ac.min rather than adding a
+// bonus. It only contributes AC when the natural total is below
+// the minimum. We capture the min value and the effect name so
+// the layer can be labelled correctly.
+// ─────────────────────────────────────────────────────────────
+function detectACMinimum(actor) {
+    for (const effect of actor.effects) {
+        if (effect.disabled) continue;
+        for (const change of effect.changes) {
+            if (change.key === "system.attributes.ac.min") {
+                return { min: Number(change.value), effectName: effect.name };
+            }
+        }
+    }
+    return null;
+}
+
+// ─────────────────────────────────────────────────────────────
 // AC LAYER BUILDER
 // ─────────────────────────────────────────────────────────────
 function buildACLayers(actor) {
@@ -161,6 +180,7 @@ function buildACLayers(actor) {
     );
 
     const shieldSpell = detectShieldSpellBonus(actor);
+    const acMinimum   = detectACMinimum(actor);
 
     const layers = [];
     let cursor = 0;
@@ -240,6 +260,15 @@ function buildACLayers(actor) {
         cursor += shieldSpell.bonus;
     }
 
+    // Barkskin / AC minimum layer
+    // Only adds a layer if the minimum is actually higher than what
+    // the normal layers already built up to — i.e. it's doing work.
+    if (acMinimum && acMinimum.min > cursor) {
+        const contribution = Math.min(acMinimum.min, ac.value) - cursor;
+        layers.push({ floor: cursor, ceil: cursor + contribution, key: "barkskin", spellName: acMinimum.effectName, min: acMinimum.min });
+        cursor += contribution;
+    }
+
     // Catch-all for remaining bonuses (cover, other AEs, etc.)
     const remaining = ac.value - cursor;
     if (remaining > 0) {
@@ -292,6 +321,9 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
             break;
         case "shield-spell":
             narrative = `An invisible barrier flares around <b>${defenderName}</b> — <b>${layer.spellName}</b> swallows the blow entirely.`;
+            break;
+        case "barkskin":
+            narrative = `The attack scrapes across <b>${defenderName}</b>'s bark-hardened skin yet fails to pierce enough to do any significant damage.`;
             break;
         case "other":
             narrative = `<b>${defenderName}</b> is shielded by unseen protections. The attack falls just short.`;
