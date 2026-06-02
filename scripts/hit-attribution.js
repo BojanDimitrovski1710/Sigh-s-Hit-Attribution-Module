@@ -103,6 +103,43 @@ Hooks.on("init", () => {
 });
 
 // ─────────────────────────────────────────────────────────────
+// AC FORMULA PARSER
+// Handles racial natural armor formulas like:
+//   "13 + @abilities.dex.mod"  → Lizardfolk, Locathah
+//   "12 + @abilities.con.mod"  → Loxodon
+//   "17"                       → Tortle (flat)
+// Returns { base, abilityKey, mod, label, abbr } or null if unparseable.
+// ─────────────────────────────────────────────────────────────
+function parseACFormula(formula, actor) {
+    if (!formula) return null;
+
+    const ABILITIES = {
+        str: { label: "Strength",     abbr: "STR" },
+        dex: { label: "Dexterity",    abbr: "DEX" },
+        con: { label: "Constitution", abbr: "CON" },
+        int: { label: "Intelligence", abbr: "INT" },
+        wis: { label: "Wisdom",       abbr: "WIS" },
+        cha: { label: "Charisma",     abbr: "CHA" },
+    };
+
+    for (const [key, info] of Object.entries(ABILITIES)) {
+        if (formula.includes(`@abilities.${key}.mod`)) {
+            const stripped = formula.replace(new RegExp(`@abilities\\.${key}\\.mod`), "")
+                                    .replace(/[+\s]/g, "");
+            const base = parseInt(stripped);
+            const mod  = actor.system.abilities[key]?.mod ?? 0;
+            return { base: isNaN(base) ? 10 : base, abilityKey: key, mod, ...info };
+        }
+    }
+
+    // Pure number — flat AC (e.g. Tortle's 17)
+    const flat = parseInt(formula.trim());
+    if (!isNaN(flat)) return { base: flat, abilityKey: null, mod: 0, label: null, abbr: null };
+
+    return null;
+}
+
+// ─────────────────────────────────────────────────────────────
 // SHIELD SPELL DETECTION
 // ─────────────────────────────────────────────────────────────
 function detectShieldSpellBonus(actor) {
@@ -210,10 +247,35 @@ function buildACLayers(actor) {
         // Monk Unarmored Defense: AC = 10 + Dex + Wis
         const wisMod = actor.system.abilities.wis.mod;
         if (wisMod > 0) secondaryStat = { mod: wisMod, label: "Wisdom", abbr: "WIS" };
-    } else if (calc === "natural") {
-        armorBase = ac.armor ?? 10;
-        dexCap    = 0;
-        armorName = "natural armor";
+    } else if (calc === "natural" || calc === "custom") {
+        // Try to parse the formula first — covers racial natural armor and any
+        // custom formula that follows the "<base> + @abilities.<key>.mod" pattern.
+        const parsed = parseACFormula(ac.formula, actor);
+        dbg("Natural/custom AC formula:", ac.formula, "→ parsed:", parsed);
+
+        if (parsed) {
+            armorBase = parsed.base;
+            armorName = calc === "natural" ? "natural armor" : "natural armor";
+
+            if (parsed.abilityKey === "dex") {
+                // e.g. Lizardfolk / Locathah: 13 + Dex — let the dex layer handle it
+                dexCap = Infinity;
+            } else if (parsed.abilityKey) {
+                // e.g. Loxodon: 12 + Con — treat like barbarian secondary stat
+                dexCap = 0;
+                if (parsed.mod > 0) {
+                    secondaryStat = { mod: parsed.mod, label: parsed.label, abbr: parsed.abbr, source: "natural" };
+                }
+            } else {
+                // e.g. Tortle: flat 17 — no ability mod at all
+                dexCap = 0;
+            }
+        } else {
+            // No formula — fall back to reading ac.armor as the flat total
+            armorBase = ac.armor ?? 10;
+            dexCap    = 0;
+            armorName = "natural armor";
+        }
     } else if (calc === "flat") {
         armorBase = ac.flat ?? 10;
         dexCap    = 0;
@@ -302,6 +364,8 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
         case "armor":
             if (layer.armorName === "Draconic Resilience") {
                 narrative = `The blow glances off <b>${defenderName}</b>'s hardened draconic scales.`;
+            } else if (layer.armorName === "natural armor") {
+                narrative = `The attack strikes <b>${defenderName}</b>'s natural hide — tough enough to turn the blow aside.`;
             } else {
                 narrative = `The blow lands, but <b>${defenderName}</b>'s <b>${layer.armorName}</b> bears the brunt of the blow.`;
             }
@@ -310,9 +374,14 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
             narrative = `<b>${defenderName}</b> shifts just enough at the last moment — their reflexes (DEX +${dexMod}) pull them clear.`;
             break;
         case "secondary-stat":
-            if (layer.abbr === "CON") {
+            if (layer.source === "natural") {
+                // Racial natural armor with a secondary ability (e.g. Loxodon: 12 + Con)
+                narrative = `The blow strikes <b>${defenderName}</b>'s hide, but their thick natural armor absorbs what remains.`;
+            } else if (layer.abbr === "CON") {
+                // Barbarian unarmored defense
                 narrative = `<b>${defenderName}</b>'s battle-hardened body absorbs the impact — their constitution holds firm.`;
             } else {
+                // Monk unarmored defense
                 narrative = `<b>${defenderName}</b> flows with preternatural calm, their focused mind sensing the strike just in time.`;
             }
             break;
