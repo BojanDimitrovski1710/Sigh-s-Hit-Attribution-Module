@@ -177,6 +177,10 @@ function buildACLayers(actor) {
     if (calc === "mage") {
         armorBase = 13;
         armorName = "Mage Armor";
+    } else if (calc === "draconic") {
+        // Draconic Resilience (Sorcerer) and Dragon Hide (feat): AC = 13 + Dex
+        armorBase = 13;
+        armorName = "Draconic Resilience";
     } else if (calc === "natural") {
         armorBase = ac.armor ?? 10;
         dexCap    = 0;
@@ -252,7 +256,11 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
             narrative = `<b>${attackerName}</b> completely fumbles — the attack never had a chance.`;
             break;
         case "armor":
-            narrative = `The blow lands, but <b>${layer.armorName}</b> turns it aside.`;
+            if (layer.armorName === "Draconic Resilience") {
+                narrative = `The blow glances off <b>${defenderName}</b>'s hardened draconic scales.`;
+            } else {
+                narrative = `The blow lands, but <b>${defenderName}</b>'s <b>${layer.armorName}</b> bears the brunt of the blow.`;
+            }
             break;
         case "dex":
             narrative = `<b>${defenderName}</b> shifts just enough at the last moment — their reflexes (DEX +${dexMod}) pull them clear.`;
