@@ -170,9 +170,10 @@ function buildACLayers(actor) {
     cursor = 10;
 
     // Determine armor base and dex cap
-    let armorBase = 10;
-    let dexCap    = Infinity;
-    let armorName = null;
+    let armorBase     = 10;
+    let dexCap        = Infinity;
+    let armorName     = null;
+    let secondaryStat = null; // { mod, label } — used by unarmored defense variants
 
     if (calc === "mage") {
         armorBase = 13;
@@ -181,6 +182,14 @@ function buildACLayers(actor) {
         // Draconic Resilience (Sorcerer) and Dragon Hide (feat): AC = 13 + Dex
         armorBase = 13;
         armorName = "Draconic Resilience";
+    } else if (calc === "unarmoredBarb") {
+        // Barbarian Unarmored Defense: AC = 10 + Dex + Con
+        const conMod = actor.system.abilities.con.mod;
+        if (conMod > 0) secondaryStat = { mod: conMod, label: "Constitution", abbr: "CON" };
+    } else if (calc === "unarmoredMonk") {
+        // Monk Unarmored Defense: AC = 10 + Dex + Wis
+        const wisMod = actor.system.abilities.wis.mod;
+        if (wisMod > 0) secondaryStat = { mod: wisMod, label: "Wisdom", abbr: "WIS" };
     } else if (calc === "natural") {
         armorBase = ac.armor ?? 10;
         dexCap    = 0;
@@ -210,6 +219,12 @@ function buildACLayers(actor) {
     if (appliedDex > 0) {
         layers.push({ floor: cursor, ceil: cursor + appliedDex, key: "dex", dexMod: appliedDex });
         cursor += appliedDex;
+    }
+
+    // Secondary stat layer (Barbarian CON, Monk WIS)
+    if (secondaryStat?.mod > 0) {
+        layers.push({ floor: cursor, ceil: cursor + secondaryStat.mod, key: "secondary-stat", ...secondaryStat });
+        cursor += secondaryStat.mod;
     }
 
     // Shield item layer
@@ -264,6 +279,13 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
             break;
         case "dex":
             narrative = `<b>${defenderName}</b> shifts just enough at the last moment — their reflexes (DEX +${dexMod}) pull them clear.`;
+            break;
+        case "secondary-stat":
+            if (layer.abbr === "CON") {
+                narrative = `<b>${defenderName}</b>'s battle-hardened body absorbs the impact — their constitution holds firm.`;
+            } else {
+                narrative = `<b>${defenderName}</b> flows with preternatural calm, their focused mind sensing the strike just in time.`;
+            }
             break;
         case "shield-item":
             narrative = `<b>${defenderName}</b> raises their <b>${layer.shieldName}</b> and the attack glances off with a clang.`;
