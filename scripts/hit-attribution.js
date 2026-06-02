@@ -146,18 +146,18 @@ function buildACLayers(actor) {
         "AC effects on", actor.name,
         `| total AC: ${ac.value} | calc: ${calc} | dex mod: ${dexMod}`,
         "\nEffects:", acEffects.length ? acEffects : "(none)",
-        "\nEquipped armor:", actor.items.filter(i => i.type === "equipment" && i.system.equipped && i.system.armor?.type).map(i => `${i.name} (${i.system.armor.type}, AC ${i.system.armor.value})`),
+        "\nEquipped armor:", actor.items.filter(i => i.type === "equipment" && i.system.equipped && i.system.type?.value).map(i => `${i.name} (${i.system.type.value}, AC ${i.system.armor?.value})`),
     );
 
     const equippedArmor = actor.items.find(i =>
         i.type === "equipment" &&
         i.system.equipped &&
-        ["light", "medium", "heavy"].includes(i.system.armor?.type)
+        ["light", "medium", "heavy"].includes(i.system.type?.value)
     );
     const equippedShieldItem = actor.items.find(i =>
         i.type === "equipment" &&
         i.system.equipped &&
-        i.system.armor?.type === "shield"
+        i.system.type?.value === "shield"
     );
 
     const shieldSpell = detectShieldSpellBonus(actor);
@@ -188,7 +188,7 @@ function buildACLayers(actor) {
     } else if (equippedArmor) {
         armorBase = equippedArmor.system.armor.value ?? 10;
         armorName = equippedArmor.name;
-        const type = equippedArmor.system.armor.type;
+        const type = equippedArmor.system.type?.value;
         if (type === "heavy")       dexCap = 0;
         else if (type === "medium") dexCap = 2;
     } else {
