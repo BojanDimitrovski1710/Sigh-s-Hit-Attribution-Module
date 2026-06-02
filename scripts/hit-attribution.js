@@ -1,0 +1,313 @@
+/**
+ * Sigh's Hit Attribution Module
+ * Hooks into dnd5e attack rolls and posts flavor text explaining which AC
+ * layer stopped the attack (armor, dex, shield spell, etc.).
+ *
+ * Requires: Foundry v13, dnd5e system v4+
+ */
+
+const MODULE_ID = "sighs-hit-attribution";
+
+// ─────────────────────────────────────────────────────────────
+// SETTINGS
+// Registered on init, readable anywhere via game.settings.get()
+// ─────────────────────────────────────────────────────────────
+Hooks.on("init", () => {
+    game.settings.register(MODULE_ID, "showRollInfo", {
+        name: "Show roll vs AC line",
+        hint: 'Display the "Roll X vs AC Y · stopped by: ..." line beneath the flavor text.',
+        scope:  "world",
+        config: true,
+        type:   Boolean,
+        default: true,
+    });
+
+    game.settings.register(MODULE_ID, "bgColor", {
+        name: "Background color",
+        hint: "Background color of the chat message.",
+        scope:  "world",
+        config: true,
+        type:   new foundry.data.fields.ColorField({ nullable: false }),
+        default: "#500000",
+    });
+
+    game.settings.register(MODULE_ID, "bgOpacity", {
+        name: "Background opacity (0–1)",
+        hint: "How opaque the background is. 1 = fully solid, 0 = fully transparent.",
+        scope:  "world",
+        config: true,
+        type:   Number,
+        range:  { min: 0, max: 1, step: 0.05 },
+        default: 0.75,
+    });
+
+    game.settings.register(MODULE_ID, "textColor", {
+        name: "Text color",
+        hint: "Color of the main narrative text.",
+        scope:  "world",
+        config: true,
+        type:   new foundry.data.fields.ColorField({ nullable: false }),
+        default: "#ffffff",
+    });
+
+    game.settings.register(MODULE_ID, "subTextColor", {
+        name: "Sub-text color",
+        hint: 'Color of the small "Roll X vs AC Y" line.',
+        scope:  "world",
+        config: true,
+        type:   new foundry.data.fields.ColorField({ nullable: false }),
+        default: "#cccccc",
+    });
+
+    game.settings.register(MODULE_ID, "borderColor", {
+        name: "Border color",
+        hint: "Color of the left border stripe.",
+        scope:  "world",
+        config: true,
+        type:   new foundry.data.fields.ColorField({ nullable: false }),
+        default: "#cc0000",
+    });
+
+    game.settings.register(MODULE_ID, "iconColor", {
+        name: "Icon color",
+        hint: "Color of the shield icon.",
+        scope:  "world",
+        config: true,
+        type:   new foundry.data.fields.ColorField({ nullable: false }),
+        default: "#ff6b6b",
+    });
+});
+
+// ─────────────────────────────────────────────────────────────
+// SHIELD SPELL DETECTION
+// ─────────────────────────────────────────────────────────────
+function detectShieldSpellBonus(actor) {
+    const AC_KEYS = [
+        "system.attributes.ac.bonus",
+        "system.attributes.ac.shield",
+    ];
+    for (const effect of actor.effects) {
+        if (effect.disabled) continue;
+        for (const change of effect.changes) {
+            if (AC_KEYS.includes(change.key) && Number(change.value) >= 4) {
+                return { bonus: Number(change.value), effectName: effect.name };
+            }
+        }
+    }
+    return null;
+}
+
+// ─────────────────────────────────────────────────────────────
+// AC LAYER BUILDER
+// ─────────────────────────────────────────────────────────────
+function buildACLayers(actor) {
+    const ac     = actor.system.attributes.ac;
+    const dexMod = actor.system.abilities.dex.mod;
+    const calc   = ac.calc ?? "default";
+
+    const equippedArmor = actor.items.find(i =>
+        i.type === "equipment" &&
+        i.system.equipped &&
+        ["light", "medium", "heavy"].includes(i.system.armor?.type)
+    );
+    const equippedShieldItem = actor.items.find(i =>
+        i.type === "equipment" &&
+        i.system.equipped &&
+        i.system.armor?.type === "shield"
+    );
+
+    const shieldSpell = detectShieldSpellBonus(actor);
+
+    const layers = [];
+    let cursor = 0;
+
+    // Zone 0: below base 10 — complete fumble
+    layers.push({ floor: -Infinity, ceil: 10, key: "fumble" });
+    cursor = 10;
+
+    // Determine armor base and dex cap
+    let armorBase = 10;
+    let dexCap    = Infinity;
+    let armorName = null;
+
+    if (calc === "mage") {
+        armorBase = 13;
+        armorName = "Mage Armor";
+    } else if (calc === "natural") {
+        armorBase = ac.armor ?? 10;
+        dexCap    = 0;
+        armorName = "natural armor";
+    } else if (calc === "flat") {
+        armorBase = ac.flat ?? 10;
+        dexCap    = 0;
+        armorName = "armor";
+    } else if (equippedArmor) {
+        armorBase = equippedArmor.system.armor.value ?? 10;
+        armorName = equippedArmor.name;
+        const type = equippedArmor.system.armor.type;
+        if (type === "heavy")       dexCap = 0;
+        else if (type === "medium") dexCap = 2;
+    } else {
+        armorBase = 10; // unarmored — dex goes on base directly
+    }
+
+    // Armor layer
+    if (armorBase > cursor) {
+        layers.push({ floor: cursor, ceil: armorBase, key: "armor", armorName });
+        cursor = armorBase;
+    }
+
+    // Dex layer
+    const appliedDex = Math.max(0, Math.min(dexMod, dexCap));
+    if (appliedDex > 0) {
+        layers.push({ floor: cursor, ceil: cursor + appliedDex, key: "dex", dexMod: appliedDex });
+        cursor += appliedDex;
+    }
+
+    // Shield item layer
+    if (equippedShieldItem) {
+        const bonus = equippedShieldItem.system.armor.value ?? 2;
+        layers.push({ floor: cursor, ceil: cursor + bonus, key: "shield-item", shieldName: equippedShieldItem.name, bonus });
+        cursor += bonus;
+    }
+
+    // Shield spell layer
+    if (shieldSpell) {
+        layers.push({ floor: cursor, ceil: cursor + shieldSpell.bonus, key: "shield-spell", spellName: shieldSpell.effectName, bonus: shieldSpell.bonus });
+        cursor += shieldSpell.bonus;
+    }
+
+    // Catch-all for remaining bonuses (cover, other AEs, etc.)
+    const remaining = ac.value - cursor;
+    if (remaining > 0) {
+        layers.push({ floor: cursor, ceil: ac.value, key: "other", bonus: remaining });
+    }
+
+    return layers;
+}
+
+// ─────────────────────────────────────────────────────────────
+// LAYER LOOKUP
+// ─────────────────────────────────────────────────────────────
+function findMissLayer(rollTotal, layers) {
+    for (let i = layers.length - 1; i >= 0; i--) {
+        if (rollTotal >= layers[i].floor) return layers[i];
+    }
+    return layers[0];
+}
+
+// ─────────────────────────────────────────────────────────────
+// FLAVOR TEXT
+// ─────────────────────────────────────────────────────────────
+function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderActor) {
+    const dexMod = defenderActor.system.abilities.dex.mod;
+    let narrative = "";
+
+    switch (layer.key) {
+        case "fumble":
+            narrative = `<b>${attackerName}</b> completely fumbles — the attack never had a chance.`;
+            break;
+        case "armor":
+            narrative = `The blow lands, but <b>${layer.armorName}</b> turns it aside.`;
+            break;
+        case "dex":
+            narrative = `<b>${defenderName}</b> shifts just enough at the last moment — their reflexes (DEX +${dexMod}) pull them clear.`;
+            break;
+        case "shield-item":
+            narrative = `<b>${defenderName}</b> raises their <b>${layer.shieldName}</b> and the attack glances off with a clang.`;
+            break;
+        case "shield-spell":
+            narrative = `An invisible barrier flares around <b>${defenderName}</b> — <b>${layer.spellName}</b> swallows the blow entirely.`;
+            break;
+        case "other":
+            narrative = `<b>${defenderName}</b> is shielded by unseen protections. The attack falls just short.`;
+            break;
+        default:
+            narrative = `<b>${defenderName}</b> narrowly avoids the attack.`;
+    }
+
+    // Read settings
+    const showRollInfo = game.settings.get(MODULE_ID, "showRollInfo");
+    const bgColor      = game.settings.get(MODULE_ID, "bgColor");
+    const bgOpacity    = game.settings.get(MODULE_ID, "bgOpacity");
+    const textColor    = game.settings.get(MODULE_ID, "textColor");
+    const subTextColor = game.settings.get(MODULE_ID, "subTextColor");
+    const borderColor  = game.settings.get(MODULE_ID, "borderColor");
+    const iconColor    = game.settings.get(MODULE_ID, "iconColor");
+
+    // Convert hex color + opacity into rgba for the background
+    // ColorField returns a Foundry Color object, so coerce to string first
+    const hex = String(bgColor).replace("#", "");
+    const r   = parseInt(hex.substring(0, 2), 16);
+    const g   = parseInt(hex.substring(2, 4), 16);
+    const b   = parseInt(hex.substring(4, 6), 16);
+    const bg  = `rgba(${r}, ${g}, ${b}, ${bgOpacity})`;
+
+    const layerLabel = layer.armorName ?? layer.shieldName ?? layer.spellName ?? layer.key;
+
+    const rollLine = showRollInfo ? `
+        <div style="font-size:0.8em; color:${subTextColor}; margin-top:3px; font-style:normal;">
+            Roll <b>${rollTotal}</b> vs AC <b>${defenderActor.system.attributes.ac.value}</b>
+            &nbsp;·&nbsp; stopped by: <i>${layerLabel}</i>
+        </div>` : "";
+
+    return `
+<div style="
+    border-left: 3px solid ${borderColor};
+    padding: 6px 10px;
+    margin: 4px 0;
+    font-style: italic;
+    color: ${textColor};
+    background: ${bg};
+    border-radius: 0 4px 4px 0;
+">
+    <i class="fas fa-shield-halved" style="color:${iconColor}; margin-right:5px;"></i>${narrative}${rollLine}
+</div>`.trim();
+}
+
+// ─────────────────────────────────────────────────────────────
+// MAIN HOOK
+// ─────────────────────────────────────────────────────────────
+Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
+    const roll = rolls?.[0];
+    
+    if (!roll) return;
+
+    const rollTotal    = roll.total;
+    const attackerName = options?.subject?.actor?.name ?? game.user?.character?.name ?? "The attacker";
+
+    const targets = game.user.targets;
+    
+    if (!targets || targets.size === 0) return;
+
+    for (const targetToken of targets) {
+        const targetActor = targetToken.actor;
+        if (!targetActor) continue;
+
+        const defenderName = targetToken.name ?? targetActor.name;
+        const totalAC      = targetActor.system.attributes.ac?.value;
+        if (totalAC == null) continue;
+
+        // Only flavor misses
+        if (rollTotal >= totalAC) continue;
+
+        const layers    = buildACLayers(targetActor);
+        const missLayer = findMissLayer(rollTotal, layers);
+        const content   = buildFlavorHTML(rollTotal, attackerName, defenderName, missLayer, targetActor);
+
+        await ChatMessage.create({
+            content,
+            speaker: { alias: "⚔️ Combat" },
+            flags: {
+                [MODULE_ID]: {
+                    type:     "miss-attribution",
+                    roll:     rollTotal,
+                    ac:       totalAC,
+                    layerKey: missLayer.key,
+                }
+            }
+        });
+    }
+});
+
+console.log(`${MODULE_ID} | loaded`);
