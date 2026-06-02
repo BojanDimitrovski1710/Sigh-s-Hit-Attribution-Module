@@ -140,22 +140,27 @@ function parseACFormula(formula, actor) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// SHIELD SPELL DETECTION
+// MAGICAL AC BONUS DETECTION
+// Collects all active effects that add to ac.bonus or ac.shield
+// (e.g. Shield spell +5, Shield of Faith +2, Haste +2, etc.)
+// Returns an array sorted largest-first so layers stack correctly.
 // ─────────────────────────────────────────────────────────────
-function detectShieldSpellBonus(actor) {
+function detectMagicalACBonuses(actor) {
     const AC_KEYS = [
         "system.attributes.ac.bonus",
         "system.attributes.ac.shield",
     ];
+    const found = [];
     for (const effect of actor.effects) {
         if (effect.disabled) continue;
         for (const change of effect.changes) {
-            if (AC_KEYS.includes(change.key) && Number(change.value) >= 4) {
-                return { bonus: Number(change.value), effectName: effect.name };
+            if (AC_KEYS.includes(change.key) && Number(change.value) >= 1) {
+                found.push({ bonus: Number(change.value), effectName: effect.name });
             }
         }
     }
-    return null;
+    // Largest bonus first so the most impactful layer is innermost
+    return found.sort((a, b) => b.bonus - a.bonus);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -216,8 +221,8 @@ function buildACLayers(actor) {
         i.system.type?.value === "shield"
     );
 
-    const shieldSpell = detectShieldSpellBonus(actor);
-    const acMinimum   = detectACMinimum(actor);
+    const magicalBonuses = detectMagicalACBonuses(actor);
+    const acMinimum      = detectACMinimum(actor);
 
     const layers = [];
     let cursor = 0;
@@ -316,10 +321,10 @@ function buildACLayers(actor) {
         cursor += bonus;
     }
 
-    // Shield spell layer
-    if (shieldSpell) {
-        layers.push({ floor: cursor, ceil: cursor + shieldSpell.bonus, key: "shield-spell", spellName: shieldSpell.effectName, bonus: shieldSpell.bonus });
-        cursor += shieldSpell.bonus;
+    // Magical AC bonus layers (Shield +5, Shield of Faith +2, Haste +2, etc.)
+    for (const mb of magicalBonuses) {
+        layers.push({ floor: cursor, ceil: cursor + mb.bonus, key: "shield-spell", spellName: mb.effectName, bonus: mb.bonus });
+        cursor += mb.bonus;
     }
 
     // Barkskin / AC minimum layer
