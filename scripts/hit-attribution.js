@@ -9,10 +9,34 @@
 const MODULE_ID = "sighs-hit-attribution";
 
 // ─────────────────────────────────────────────────────────────
+// DEBUG HELPER
+// Only logs when "Enable console debugging" is turned on.
+// Usage: dbg("label", value1, value2, ...)
+// ─────────────────────────────────────────────────────────────
+function dbg(...args) {
+    try {
+        if (game.settings.get(MODULE_ID, "debug")) {
+            console.log(`[${MODULE_ID}]`, ...args);
+        }
+    } catch {
+        // settings not ready yet — swallow silently
+    }
+}
+
+// ─────────────────────────────────────────────────────────────
 // SETTINGS
 // Registered on init, readable anywhere via game.settings.get()
 // ─────────────────────────────────────────────────────────────
 Hooks.on("init", () => {
+    game.settings.register(MODULE_ID, "debug", {
+        name: "Enable console debugging",
+        hint: "Log detailed info to the browser console (F12) for every attack roll processed.",
+        scope:  "world",
+        config: true,
+        type:   Boolean,
+        default: false,
+    });
+
     game.settings.register(MODULE_ID, "showRollInfo", {
         name: "Show roll vs AC line",
         hint: 'Display the "Roll X vs AC Y · stopped by: ..." line beneath the flavor text.',
@@ -104,6 +128,26 @@ function buildACLayers(actor) {
     const ac     = actor.system.attributes.ac;
     const dexMod = actor.system.abilities.dex.mod;
     const calc   = ac.calc ?? "default";
+
+    // ── Debug: dump every active effect touching AC ───────────
+    const AC_RELATED = /attributes\.ac/;
+    const acEffects = [];
+    for (const effect of actor.effects) {
+        const relevantChanges = effect.changes.filter(c => AC_RELATED.test(c.key));
+        if (relevantChanges.length > 0) {
+            acEffects.push({
+                name:     effect.name,
+                disabled: effect.disabled,
+                changes:  relevantChanges.map(c => `${c.key} ${c.mode === 2 ? "+=" : "="} ${c.value}`),
+            });
+        }
+    }
+    dbg(
+        "AC effects on", actor.name,
+        `| total AC: ${ac.value} | calc: ${calc} | dex mod: ${dexMod}`,
+        "\nEffects:", acEffects.length ? acEffects : "(none)",
+        "\nEquipped armor:", actor.items.filter(i => i.type === "equipment" && i.system.equipped && i.system.armor?.type).map(i => `${i.name} (${i.system.armor.type}, AC ${i.system.armor.value})`),
+    );
 
     const equippedArmor = actor.items.find(i =>
         i.type === "equipment" &&
@@ -270,30 +314,54 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
 // ─────────────────────────────────────────────────────────────
 Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
     const roll = rolls?.[0];
-    
-    if (!roll) return;
+    dbg("Hook fired", { roll, options });
+
+    if (!roll) {
+        dbg("No roll found — exiting");
+        return;
+    }
 
     const rollTotal    = roll.total;
     const attackerName = options?.subject?.actor?.name ?? game.user?.character?.name ?? "The attacker";
+    dbg("Roll total:", rollTotal, "| Attacker:", attackerName);
 
     const targets = game.user.targets;
-    
-    if (!targets || targets.size === 0) return;
+    dbg("Targets:", targets?.size ?? 0, [...(targets ?? [])].map(t => t.name));
+
+    if (!targets || targets.size === 0) {
+        dbg("No targets — exiting");
+        return;
+    }
 
     for (const targetToken of targets) {
         const targetActor = targetToken.actor;
-        if (!targetActor) continue;
+        if (!targetActor) {
+            dbg("Target token has no actor — skipping:", targetToken.name);
+            continue;
+        }
 
         const defenderName = targetToken.name ?? targetActor.name;
         const totalAC      = targetActor.system.attributes.ac?.value;
-        if (totalAC == null) continue;
+        dbg("Defender:", defenderName, "| Total AC:", totalAC);
 
-        // Only flavor misses
-        if (rollTotal >= totalAC) continue;
+        if (totalAC == null) {
+            dbg("Could not read AC — skipping");
+            continue;
+        }
+
+        if (rollTotal >= totalAC) {
+            dbg("Hit (roll >= AC) — no flavor message");
+            continue;
+        }
 
         const layers    = buildACLayers(targetActor);
+        dbg("AC layers built:", layers.map(l => `${l.key} [${l.floor === -Infinity ? "-∞" : l.floor}–${l.ceil})`));
+
         const missLayer = findMissLayer(rollTotal, layers);
-        const content   = buildFlavorHTML(rollTotal, attackerName, defenderName, missLayer, targetActor);
+        dbg("Miss layer resolved:", missLayer.key, missLayer);
+
+        const content = buildFlavorHTML(rollTotal, attackerName, defenderName, missLayer, targetActor);
+        dbg("Sending chat message");
 
         await ChatMessage.create({
             content,
@@ -307,6 +375,8 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
                 }
             }
         });
+
+        dbg("Chat message sent successfully");
     }
 });
 
