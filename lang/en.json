@@ -1,0 +1,556 @@
+{
+  "_comment": "Flavor text for Sigh's Hit Attribution module. Each key is a layer type, each sub-key is a damage type (or 'default'). Values are arrays — one line is chosen at random. Tokens: {attacker} {attack} {defender} {armorName} {shieldName} {spellName} {dexMod} {abilityMod} {abilityAbbr}",
+
+  "fumble": {
+    "default": [
+      "{attacker}'s {attack} goes hopelessly wide — it never had a chance.",
+      "{attacker} stumbles through the {attack}, missing by a mile.",
+      "A clumsy {attack} from {attacker} connects with nothing but air.",
+      "{attacker} overextends on the {attack} and nearly loses their footing entirely."
+    ],
+    "piercing": [
+      "{attacker}'s {attack} goes wide, finding nothing but empty air.",
+      "The {attack} from {attacker} is telegraphed a mile away — {defender} barely needed to move.",
+      "{attacker} lunges with {attack} but the angle is all wrong from the start."
+    ],
+    "slashing": [
+      "{attacker}'s {attack} sweeps through empty air with an embarrassing whoosh.",
+      "The {attack} from {attacker} is wild and uncontrolled — it was never going to land.",
+      "{attacker} over-rotates on the {attack} and stumbles past {defender} entirely."
+    ],
+    "bludgeoning": [
+      "{attacker} brings the {attack} down hard — onto nothing.",
+      "The {attack} from {attacker} crashes into the ground well short of {defender}.",
+      "{attacker} winds up for a massive {attack}... and completely whiffs."
+    ],
+    "fire": [
+      "{attacker}'s {attack} dissipates harmlessly before reaching {defender}.",
+      "The flames from {attacker}'s {attack} gutter and die in the air between them.",
+      "A weak {attack} from {attacker} fizzles out well short of its mark."
+    ],
+    "cold": [
+      "{attacker}'s {attack} scatters on the wind before reaching {defender}.",
+      "The chill of {attacker}'s {attack} disperses into nothing — far too weak to matter.",
+      "Ice crystals from the {attack} fall short, {attacker}'s aim completely off."
+    ],
+    "lightning": [
+      "{attacker}'s {attack} sparks and arcs away into the ground, hitting nothing.",
+      "The {attack} from {attacker} forks wildly and grounds itself well clear of {defender}.",
+      "A crackling {attack} fizzles in {attacker}'s hands before it can even form properly."
+    ],
+    "thunder": [
+      "{attacker}'s {attack} rolls off in entirely the wrong direction.",
+      "The shockwave from {attacker}'s {attack} dissipates before it reaches {defender}.",
+      "{attacker}'s {attack} lets loose a thunderous blast — that hits nothing."
+    ],
+    "acid": [
+      "{attacker}'s {attack} splatters the ground well short of {defender}.",
+      "A glob of corrosive fluid from {attacker}'s {attack} lands nowhere near its target.",
+      "{attacker}'s {attack} sizzles harmlessly into the earth."
+    ],
+    "poison": [
+      "{attacker}'s {attack} misses completely — the venom wasted.",
+      "The {attack} from {attacker} goes wide, the poison serving no purpose.",
+      "{attacker} lunges with {attack} and hits absolutely nothing."
+    ],
+    "necrotic": [
+      "{attacker}'s {attack} bleeds into the ground, touching nothing living.",
+      "The {attack} from {attacker} passes harmlessly through empty space.",
+      "{attacker}'s {attack} unravels before it can find a target."
+    ],
+    "radiant": [
+      "{attacker}'s {attack} blooms in the wrong direction entirely.",
+      "The {attack} from {attacker} flares and fades, having touched nothing.",
+      "{attacker}'s {attack} blazes wide and illuminates only empty floor."
+    ],
+    "force": [
+      "{attacker}'s {attack} streaks past {defender} and dissipates into the wall.",
+      "The {attack} from {attacker} shunts through empty air.",
+      "{attacker}'s {attack} surges in entirely the wrong direction."
+    ],
+    "psychic": [
+      "{attacker}'s {attack} finds no purchase — {defender}'s mind untouched.",
+      "The {attack} from {attacker} glances off nothing of consequence.",
+      "{attacker}'s {attack} grasps only empty thought."
+    ]
+  },
+
+  "armor": {
+    "default": [
+      "The {attack} lands squarely but {defender}'s {armorName} turns it aside.",
+      "{attacker}'s {attack} connects — and stops dead against {defender}'s {armorName}.",
+      "{defender}'s {armorName} absorbs the hit. {defender} barely registers it.",
+      "A solid {attack} from {attacker}, but {defender}'s {armorName} does exactly what it was made to do."
+    ],
+    "piercing": [
+      "The {attack} finds no gap in {defender}'s {armorName}, skittering off harmlessly.",
+      "{attacker}'s {attack} is stopped cold by {defender}'s {armorName} — no penetration.",
+      "The {attack} bites into {defender}'s {armorName} but fails to punch through."
+    ],
+    "slashing": [
+      "The {attack} skitters across {defender}'s {armorName} with a harsh screech of metal.",
+      "{attacker}'s {attack} rakes across {defender}'s {armorName} and slides off without purchase.",
+      "A ringing {attack} against {defender}'s {armorName} — sparks fly, but no wound follows."
+    ],
+    "bludgeoning": [
+      "{defender}'s {armorName} absorbs the {attack} with a resonant clang.",
+      "The {attack} hammers into {defender}'s {armorName} and transfers harmlessly.",
+      "{attacker} lands the {attack} but {defender}'s {armorName} spreads the force wide."
+    ],
+    "fire": [
+      "Flames from the {attack} lick across {defender}'s {armorName} but fail to find flesh beneath.",
+      "The fire chars the surface of {defender}'s {armorName} but stops before reaching {defender}.",
+      "{defender}'s {armorName} smolders briefly under {attacker}'s {attack} — then nothing."
+    ],
+    "cold": [
+      "Ice crystals from the {attack} form across {defender}'s {armorName} but the chill never reaches them.",
+      "Frost clings to {defender}'s {armorName}, slowing nothing, harming no one.",
+      "{attacker}'s {attack} coats {defender}'s {armorName} in a thin rime — and stops there."
+    ],
+    "lightning": [
+      "Lightning from the {attack} crackles across {defender}'s {armorName} and grounds out.",
+      "The {attack} discharges against {defender}'s {armorName} in a shower of sparks.",
+      "{attacker}'s {attack} races across {defender}'s {armorName} and finds nowhere to go."
+    ],
+    "thunder": [
+      "The shockwave of the {attack} hammers {defender}'s {armorName} but fails to breach it.",
+      "{defender}'s {armorName} rings like a bell from the {attack} — {defender} unhurt.",
+      "{attacker}'s {attack} is soaked up entirely by {defender}'s {armorName}."
+    ],
+    "acid": [
+      "Acid from the {attack} hisses across {defender}'s {armorName}, eating the surface but not through it.",
+      "{defender}'s {armorName} is pitted by the {attack} — but it holds.",
+      "Corrosive fluid from {attacker}'s {attack} splashes against {defender}'s {armorName} and eats no deeper."
+    ],
+    "poison": [
+      "The venom from the {attack} coats {defender}'s {armorName} harmlessly — no way through.",
+      "{defender}'s {armorName} keeps the poisoned {attack} well away from their skin.",
+      "{attacker}'s {attack} is intercepted by {defender}'s {armorName}."
+    ],
+    "necrotic": [
+      "Dark energy from the {attack} washes over {defender}'s {armorName} and dissipates.",
+      "{defender}'s {armorName} resists the necrotic surge — {defender} is unaffected.",
+      "The death energy bleeds away across {defender}'s {armorName}, spent without purpose."
+    ],
+    "radiant": [
+      "Radiant light floods across {defender}'s {armorName}, bright but ultimately harmless.",
+      "The {attack} crashes into {defender}'s {armorName} and scatters.",
+      "The holy {attack} flares brilliantly against {defender}'s {armorName} and goes no further."
+    ],
+    "force": [
+      "The force of the {attack} staggers {defender}'s {armorName} but transfers no real harm.",
+      "Raw force from the {attack} slams into {defender}'s {armorName} and fails to penetrate.",
+      "{attacker}'s {attack} meets {defender}'s {armorName} — and loses."
+    ],
+    "psychic": [
+      "The {attack} ripples across {defender}'s {armorName}. Odd, but {defender} is unaffected.",
+      "{defender}'s {armorName} somehow grounds the {attack}. {defender} blinks, confused but unharmed.",
+      "Mental force washes over {defender}'s {armorName} — the armor's inert bulk immune to such things."
+    ]
+  },
+
+  "armor_draconic": {
+    "default": [
+      "The {attack} glances off {defender}'s hardened draconic scales without leaving a mark.",
+      "{attacker}'s {attack} connects — but {defender}'s scales are tougher than they look.",
+      "Draconic heritage runs deep. That {attack} barely registered on {defender}'s hide.",
+      "The scales ripple under the {attack}, shifting with it. {attacker} hits nothing vital."
+    ],
+    "piercing": [
+      "The {attack} finds no gap in {defender}'s draconic scales.",
+      "{attacker}'s {attack} slides off the interlocking scales — no entry.",
+      "Draconic scales are made for exactly this. The {attack} achieves nothing."
+    ],
+    "slashing": [
+      "The {attack} rakes across {defender}'s scales with a sound like drawn steel — no wound.",
+      "{attacker}'s {attack} sparks across the draconic hide and accomplishes nothing.",
+      "Each scale deflects a little of the {attack}. Combined they deflect all of it."
+    ],
+    "bludgeoning": [
+      "The scales flex under the {attack}, spreading it harmlessly.",
+      "{defender}'s draconic heritage turns the {attack} into a non-event.",
+      "{attacker}'s {attack} hammers against the scales. They give a little — just enough."
+    ],
+    "fire": [
+      "Fire against draconic scales? {defender} practically yawns at the {attack}.",
+      "The {attack} washes over {defender}'s scales — this lineage was born in fire.",
+      "{attacker}'s {attack} splashes off {defender}'s draconic hide like water."
+    ],
+    "cold": [
+      "Cold from the {attack} bites at {defender}'s scales but finds little purchase.",
+      "Frost from {attacker}'s {attack} settles across the draconic hide and melts away.",
+      "{defender}'s scales shed the {attack}'s chill like a second skin."
+    ],
+    "lightning": [
+      "Lightning from the {attack} crackles across {defender}'s scales and arcs away harmlessly.",
+      "The {attack} dances across draconic hide and grounds out completely.",
+      "{defender}'s scales conduct the {attack}'s lightning away before it can do harm."
+    ],
+    "acid": [
+      "Acid from the {attack} hisses across the scales — but draconic hide is used to worse.",
+      "The {attack}'s corrosive splash beads off {defender}'s scales like rain.",
+      "{defender}'s draconic lineage has made their hide resistant to far worse acid than this {attack}."
+    ]
+  },
+
+  "armor_natural": {
+    "default": [
+      "The {attack} strikes {defender}'s natural hide — tough enough to turn it aside.",
+      "{defender}'s natural armor absorbs the {attack} without complaint.",
+      "{attacker}'s {attack} lands on hardened natural hide and goes no further.",
+      "Nature gave {defender} their protection. It holds against the {attack}."
+    ],
+    "piercing": [
+      "The {attack} presses against {defender}'s hide — and goes no further.",
+      "{attacker}'s {attack} is swallowed by {defender}'s thick natural armor.",
+      "Natural hide is deceptively tough. The {attack} can confirm this."
+    ],
+    "slashing": [
+      "The {attack} skids across {defender}'s thick hide, barely leaving a scratch.",
+      "{attacker}'s {attack} opens no wound — the natural armor is too dense.",
+      "Thick hide sheds the {attack} like it was nothing."
+    ],
+    "bludgeoning": [
+      "{defender}'s natural armor is built for exactly this kind of {attack}.",
+      "The {attack} thuds into {defender}'s hide and transfers nowhere useful.",
+      "Dense natural armor soaks the {attack} and gives {defender} nothing to worry about."
+    ],
+    "fire": [
+      "Flames from the {attack} lick at {defender}'s hide but natural toughness keeps the heat at bay.",
+      "{defender}'s thick skin resists the {attack}'s fire better than expected.",
+      "The {attack} chars the outer layer of {defender}'s hide — nothing more."
+    ],
+    "cold": [
+      "The {attack}'s cold bites but {defender}'s natural hide insulates well.",
+      "Frost from {attacker}'s {attack} settles across {defender}'s natural armor — a minor inconvenience.",
+      "{defender}'s thick natural hide keeps the {attack}'s chill from sinking in."
+    ],
+    "acid": [
+      "Acid from the {attack} eats at the outer layer of {defender}'s hide — there's plenty more beneath.",
+      "{defender}'s natural armor is thick enough to lose a little to the {attack} and barely notice.",
+      "The {attack}'s corrosive splash is absorbed by {defender}'s outermost hide. It goes no deeper."
+    ]
+  },
+
+  "dex": {
+    "default": [
+      "{defender} shifts just enough at the last moment — their reflexes pull them clear of the {attack}.",
+      "An almost imperceptible sidestep from {defender} is all it takes.",
+      "{attacker} had the right target. {defender}'s body just wasn't there when the {attack} arrived.",
+      "Quick feet and quicker instincts. {defender} wasn't where the {attack} expected."
+    ],
+    "piercing": [
+      "{defender} twists at the hip — the {attack} passes through empty air where they just were.",
+      "The {attack} arrives on time. {defender} does not. It finds nothing.",
+      "A neat deflection of the body — {defender} angles away from the {attack} entirely."
+    ],
+    "slashing": [
+      "{defender} leans back just far enough. The {attack} passes close enough to cut air.",
+      "The {attack} sweeps in — and {defender} is simply no longer in its path.",
+      "{defender} reads the angle of the {attack} early and steps cleanly outside it."
+    ],
+    "bludgeoning": [
+      "{defender} ducks under the {attack} at the last instant — it whistles overhead.",
+      "Footwork saves {defender} here. The {attack} lands where they were, not where they are.",
+      "{defender} rolls with the angle of the {attack}, letting it pass harmlessly."
+    ],
+    "fire": [
+      "{defender} moves fast enough that the {attack}'s flames trail behind them, finding nothing.",
+      "Quick reflexes carry {defender} clear of the {attack} before it can catch.",
+      "{defender} dances back out of the {attack}'s blaze before it can take hold."
+    ],
+    "cold": [
+      "{defender} steps clear of the {attack}, the ice forming just behind their heel.",
+      "The {attack} races toward {defender} — who is already somewhere else.",
+      "Cold air from the {attack} rushes past {defender} as they dodge just ahead of the chill."
+    ],
+    "lightning": [
+      "{defender} was already moving when the {attack} struck — a half-second too late.",
+      "The {attack} hits the spot {defender} just vacated. Instinct beat electricity.",
+      "{defender} drops low and the {attack} crackles through the space above them."
+    ],
+    "thunder": [
+      "{defender} rolls clear of the {attack}'s shockwave before it can fully engulf them.",
+      "The {attack} sweeps past {defender} who was already moving laterally.",
+      "Reaction speed makes all the difference — {defender} is out of the {attack} before it arrives."
+    ],
+    "force": [
+      "{defender} sidesteps the {attack} — felt it displace the air as it passed.",
+      "The {attack} hits nothing — {defender} was a half-step ahead of it.",
+      "The {attack} shunts through empty space where {defender} no longer stands."
+    ],
+    "psychic": [
+      "{defender}'s mind flickers away from the {attack} before it can gain a foothold.",
+      "Awareness lets {defender} sense the {attack} coming — and slip aside.",
+      "The {attack} finds {defender}'s mind — but only its retreating edge."
+    ],
+    "necrotic": [
+      "{defender} moves clear before the {attack}'s energy can find living tissue to unravel.",
+      "The {attack} chases {defender} and arrives a moment too late.",
+      "Deft footwork puts distance between {defender} and the {attack}."
+    ]
+  },
+
+  "secondary_con": {
+    "default": [
+      "{defender}'s battle-hardened body absorbs the {attack} — sheer constitution holds.",
+      "Years of punishment have built {defender} into something hard to hurt. The {attack} proves it.",
+      "The {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
+      "{attacker}'s {attack} hits flesh and bone toughened far beyond the norm. Not enough."
+    ],
+    "piercing": [
+      "The {attack} penetrates — just not deep enough. {defender}'s dense muscle stops it cold.",
+      "{defender}'s constitution-built toughness swallows the {attack} before it reaches anything vital.",
+      "A lesser body would have fallen to that {attack}. {defender}'s does not."
+    ],
+    "slashing": [
+      "The {attack} opens a line — and stops. {defender}'s constitution is as thick as their hide.",
+      "{attacker}'s {attack} bites in and finds nothing vital. Sheer toughness wins.",
+      "{defender} bleeds a little from the {attack}. Their body barely acknowledges it."
+    ],
+    "bludgeoning": [
+      "The {attack} is bone-rattling. {defender}'s bones just don't rattle.",
+      "{attacker}'s {attack} hits something solid. Constitutionally speaking, it hits back harder.",
+      "The {attack} would shatter stone. {defender}'s constitution is apparently comparable."
+    ],
+    "fire": [
+      "{defender} has taken {attack}s before. They've taken worse. They stand.",
+      "The {attack} finds purchase — briefly. Constitution builds resistance to more than weapons.",
+      "{defender} grits through the {attack}. It fades. They remain."
+    ],
+    "cold": [
+      "{defender} shudders once from the {attack} — and shakes it off. Constitution runs deep.",
+      "The {attack}'s cold sinks in. {defender}'s constitution pushes it back out.",
+      "The {attack} bites at {defender}. They bite back harder."
+    ],
+    "necrotic": [
+      "The {attack}'s necrotic energy bores into {defender}. Their constitution fights it to a standstill.",
+      "Life-draining {attack} meets a life-force too stubborn to drain easily.",
+      "{defender}'s constitution is not a subtle thing. It simply refuses the {attack}."
+    ]
+  },
+
+  "secondary_wis": {
+    "default": [
+      "{defender} flows with preternatural calm — their focused mind sensed the {attack} coming.",
+      "Stillness and awareness are {defender}'s armor here. The {attack} finds neither opening.",
+      "{defender} doesn't dodge so much as simply not be where the {attack} expects.",
+      "There is no gap in {defender}'s awareness. The {attack} finds no gap in their defense."
+    ],
+    "piercing": [
+      "{defender}'s mind was already a half-breath ahead. The {attack} finds nothing.",
+      "Focused awareness lets {defender} feel the {attack}'s angle before it arrives.",
+      "The {attack} reaches {defender} — who has already arranged themselves for it to miss."
+    ],
+    "slashing": [
+      "{defender} reads the arc of the {attack} through something beyond instinct. They are not in it.",
+      "Still water reflects everything. {defender}'s calm mind reflects the {attack} — and avoids it.",
+      "The {attack} sweeps wide of a target that simply isn't there anymore."
+    ],
+    "psychic": [
+      "{defender}'s disciplined mind closes like a fist around the {attack} — then expels it.",
+      "Mental training runs deep in {defender}. The {attack} finds nothing to grip.",
+      "{defender}'s inner stillness is a wall. The {attack} breaks on it."
+    ],
+    "force": [
+      "Awareness of intent lets {defender} respond to the {attack} before it fully manifests.",
+      "{defender}'s trained mind perceives the {attack} and moves accordingly.",
+      "The {attack} arrives. {defender}'s wisdom already had them moving."
+    ]
+  },
+
+  "secondary_natural": {
+    "default": [
+      "The {attack} strikes but {defender}'s natural constitution soaks up what their hide cannot.",
+      "{defender}'s thick frame absorbs what's left of the {attack} after the natural armor. Nothing useful remains.",
+      "Natural toughness, inside and out. {attacker}'s {attack} runs out of damage before running out of {defender}.",
+      "Body and hide working together — the {attack} finds neither vulnerable."
+    ],
+    "bludgeoning": [
+      "Dense natural constitution spreads the {attack}'s impact. {defender} is built to take this.",
+      "The {attack}'s force travels through {defender}'s thick body and disperses without meaningful harm.",
+      "{defender}'s constitution-reinforced frame absorbs the {attack} like it was expected."
+    ],
+    "piercing": [
+      "Hide slows it, constitution stops it. The {attack} never reaches anything it shouldn't.",
+      "Layers of toughness — the {attack} runs out of momentum before {defender} runs out of body.",
+      "{defender}'s natural mass stops the {attack} cold."
+    ]
+  },
+
+  "shield_item": {
+    "default": [
+      "{defender} raises {defender}'s {shieldName} just in time — the {attack} glances off with a clang.",
+      "{defender}'s {shieldName} is in the right place at the right moment. The {attack} goes nowhere.",
+      "{defender} reads the {attack} and interposes {defender}'s {shieldName}. Problem solved.",
+      "The {attack} lands on {defender}'s {shieldName} with a satisfying clang. {defender} is entirely unbothered."
+    ],
+    "piercing": [
+      "The {attack} finds {defender}'s {shieldName} instead of flesh. It stops there.",
+      "{defender} angles {defender}'s {shieldName} to catch the {attack} — it skitters off harmlessly.",
+      "A well-placed {shieldName} and the {attack} is completely neutralized."
+    ],
+    "slashing": [
+      "The {attack} rings off {defender}'s {shieldName} in a shower of sparks.",
+      "{defender} takes the {attack} on {defender}'s {shieldName} and gives nothing back.",
+      "Metal on metal — {defender}'s {shieldName} wins this exchange convincingly."
+    ],
+    "bludgeoning": [
+      "{defender}'s {shieldName} absorbs the {attack}'s force. {defender}'s arm aches — nothing more.",
+      "The {attack} hammers {defender}'s {shieldName} back. They brace. They hold.",
+      "{defender} plants their feet and takes the {attack} on {defender}'s {shieldName}. It does not move them."
+    ],
+    "fire": [
+      "{defender}'s {shieldName} catches the worst of the {attack}. The flame finds no path past it.",
+      "Heat from the {attack} washes over {defender}'s {shieldName}. {defender} stays cool.",
+      "{defender} angles {defender}'s {shieldName} into the {attack}. The shield scorches. {defender} does not."
+    ],
+    "cold": [
+      "Ice from the {attack} forms across {defender}'s {shieldName} — and stops there.",
+      "{defender} catches the {attack} on {defender}'s {shieldName}. The cold never reaches them.",
+      "Frost from the {attack} crawls across {defender}'s {shieldName} and no further."
+    ],
+    "lightning": [
+      "The {attack}'s lightning grounds out across {defender}'s {shieldName} in a crackling arc.",
+      "{defender}'s {shieldName} takes the {attack}. {defender} feels the tingle. Nothing more.",
+      "The {attack} finds {defender}'s {shieldName} and expends itself entirely."
+    ],
+    "acid": [
+      "Acid from the {attack} splashes across {defender}'s {shieldName}, eating the surface. It stops there.",
+      "{defender}'s {shieldName} takes the {attack} on the chin. {defender} doesn't.",
+      "The {attack}'s corrosive spray is absorbed by {defender}'s {shieldName}. It looks worse for wear. {defender} does not."
+    ],
+    "force": [
+      "Invisible force from the {attack} hammers {defender}'s {shieldName} — transmitted to {defender}'s arm. They hold.",
+      "{defender} braces {defender}'s {shieldName} against the {attack}. Braced things tend to hold.",
+      "The {attack}'s raw force hits {defender}'s {shieldName} and goes nowhere useful."
+    ]
+  },
+
+  "shield_spell": {
+    "default": [
+      "An invisible barrier surges around {defender} — {spellName} swallows the {attack} entirely.",
+      "{spellName} flares between {attacker} and {defender}. The {attack} never arrives.",
+      "Magical protection intercepts the {attack} before it can land. {spellName} earns its keep.",
+      "{defender}'s {spellName} shimmers into visibility as it absorbs the {attack}, then vanishes again."
+    ],
+    "piercing": [
+      "The {attack} strikes an invisible wall — {spellName} — and stops dead.",
+      "{spellName} stops the {attack} as surely as any physical armor. More so, perhaps.",
+      "The {attack} meets magical resistance it cannot overcome. {spellName} holds."
+    ],
+    "slashing": [
+      "The {attack} sweeps toward {defender} and hits nothing it can cut. {spellName} sees to that.",
+      "A sharp {attack} against something with no surface to cut. {spellName} dissipates it.",
+      "{spellName} gives the {attack} nothing to bite into. It is simply negated."
+    ],
+    "bludgeoning": [
+      "The force of the {attack} disperses harmlessly against {spellName}'s invisible surface.",
+      "{spellName} absorbs the {attack}'s concussive impact with eerie silence.",
+      "The {attack}'s force meets magical resistance. The force doesn't win."
+    ],
+    "fire": [
+      "The {attack} roars toward {defender} — {spellName} smothers it before it arrives.",
+      "The {attack} pushes against {spellName}'s barrier and cannot push through.",
+      "Magical protection and fire have a long-standing disagreement. Today, {spellName} wins."
+    ],
+    "cold": [
+      "The {attack} is intercepted by {spellName}. {defender} feels nothing.",
+      "The {attack} crashes against {spellName}'s barrier and shatters into harmless crystals.",
+      "{spellName} keeps the {attack}'s chill at arm's length — literally."
+    ],
+    "lightning": [
+      "The {attack}'s lightning strikes {spellName}'s barrier and discharges harmlessly.",
+      "The {attack} forks and dissipates against {spellName}'s magical field.",
+      "The {attack}'s electrical energy is grounded entirely within {spellName}'s protective radius."
+    ],
+    "thunder": [
+      "The {attack}'s shockwave hammers {spellName} and finds itself absorbed without trace.",
+      "The {attack}'s force breaks against {spellName}'s magic like a wave against stone.",
+      "{spellName} quietly dismantles the {attack} before {defender} even feels it."
+    ],
+    "necrotic": [
+      "The {attack}'s death energy washes against {spellName}'s barrier — and finds it unwilling to yield.",
+      "The {attack}'s necrotic force cannot unravel what {spellName} has woven. {defender} is safe.",
+      "{spellName} stands between the {attack} and {defender}. It is enough."
+    ],
+    "radiant": [
+      "Radiant light from the {attack} flares brilliantly against {spellName}'s field — beautiful and harmless.",
+      "{spellName} redirects the {attack}'s divine energy away from {defender} without effort.",
+      "Holy {attack} meets {spellName}'s magical protection. Neither yields. {defender} takes no damage."
+    ],
+    "force": [
+      "The {attack}'s force meets {spellName}'s force. {spellName} wins.",
+      "The {attack} hammers {spellName}'s invisible barrier and expends itself entirely.",
+      "Even the {attack}'s raw arcane force cannot breach {spellName}'s protection. Not today."
+    ],
+    "psychic": [
+      "{spellName} extends its protection to the mental realm — the {attack} finds no entry.",
+      "Magical warding bends the {attack} away from {defender}'s mind.",
+      "The {attack} rushes in and finds {spellName} already waiting for it."
+    ]
+  },
+
+  "barkskin": {
+    "default": [
+      "The {attack} scrapes across {defender}'s bark-hardened skin — {spellName} holds firm.",
+      "{spellName} has made {defender}'s skin as tough as old wood. The {attack} proves it.",
+      "The {attack} lands against what feels like hitting a tree. That's because it is. {spellName}.",
+      "Bark-skin courtesy of {spellName} — {attacker}'s {attack} might as well have struck an oak."
+    ],
+    "piercing": [
+      "The {attack} sinks into bark-hardened skin and stops. {spellName} did its job.",
+      "{spellName}'s protection is exactly as thick as it needs to be. The {attack} proves it.",
+      "Bark doesn't give way for the {attack}. {spellName} has made {defender} bark."
+    ],
+    "slashing": [
+      "The {attack} rakes across hardened bark-skin and finds no purchase. {spellName} holds.",
+      "The {attack} against {defender}'s {spellName}-hardened skin is like trying to slash a tree. It doesn't work.",
+      "{spellName} has replaced vulnerable skin with something far less cuttable by the {attack}."
+    ],
+    "bludgeoning": [
+      "Bark absorbs the {attack} as well as any armor. {spellName} handles it.",
+      "Dense bark-hardened skin distributes the {attack}'s blunt force harmlessly.",
+      "Hammering bark doesn't hurt the tree. {defender} has become the tree, courtesy of {spellName}."
+    ],
+    "fire": [
+      "Bark is flammable, but {spellName}'s protection is thicker than the {attack} is hot. Today.",
+      "The {attack} chars the bark surface created by {spellName}. It goes no deeper.",
+      "Bark burns — slowly. The {attack} doesn't stay long enough. {spellName} holds."
+    ],
+    "acid": [
+      "The {attack}'s acid eats into bark more slowly than flesh. {spellName} buys enough time.",
+      "{spellName} has made {defender}'s skin acid-resistant by virtue of simply being bark.",
+      "The {attack} works on the bark created by {spellName} — and runs out before it runs out of bark."
+    ]
+  },
+
+  "other": {
+    "default": [
+      "{defender} is protected by forces unseen. The {attack} falls just short.",
+      "Something stops the {attack} that {attacker} can't quite account for.",
+      "{defender} shrugs off the {attack} through means {attacker} can't easily explain.",
+      "Protected by... something. {attacker}'s {attack} proves insufficient either way."
+    ],
+    "piercing": [
+      "The {attack} finds no way through — some protection {attacker} hadn't anticipated.",
+      "An unseen force deflects the {attack} at the last moment.",
+      "{defender} is better protected than {attacker} could have known."
+    ],
+    "slashing": [
+      "The {attack} meets unseen resistance and deflects without purchase.",
+      "Some unknown protection sheds the {attack} without explanation.",
+      "{attacker}'s {attack} is turned aside by something they never saw."
+    ],
+    "bludgeoning": [
+      "The {attack} lands — and the impact goes nowhere. Unclear why.",
+      "Something absorbs the {attack}'s force before it can do damage.",
+      "{defender} doesn't react to the {attack} the way {attacker} expected. More protected than apparent."
+    ],
+    "magical": [
+      "Magical protections layer around {defender} — {attacker}'s {attack} finds no gap.",
+      "Arcane wards intercept the {attack} in ways {attacker} can't easily counter.",
+      "{defender} is wrapped in more magical protection than is immediately obvious."
+    ]
+  }
+}
