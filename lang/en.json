@@ -3,99 +3,99 @@
 
   "fumble": {
     "default": [
-      "{attacker}'s {attack} goes hopelessly wide — it never had a chance.",
-      "{attacker} stumbles through the {attack}, missing by a mile.",
-      "A clumsy {attack} from {attacker} connects with nothing but air.",
-      "{attacker} overextends on the {attack} and nearly loses their footing entirely."
+      "{attacker}'s {attack} go{vs} hopelessly wide — {isAre} never going to land.",
+      "{attacker}'s {attack} miss{ves} completely, connecting with nothing but air.",
+      "A clumsy {attack} from {attacker} find{vs} nothing but empty space.",
+      "{attacker} overextend{vs} on the {attack} and nearly loses their footing entirely."
     ],
     "piercing": [
-      "{attacker}'s {attack} goes wide, finding nothing but empty air.",
-      "The {attack} from {attacker} is telegraphed a mile away — {defender} barely needed to move.",
-      "{attacker} lunges with {attack} but the angle is all wrong from the start."
+      "{attacker}'s {attack} go{vs} wide, finding nothing but empty air.",
+      "The {attack} from {attacker} {isAre} telegraphed a mile away — {defender} barely needed to move.",
+      "{attacker} lunge{vs} with {attack} but the angle is all wrong from the start."
     ],
     "slashing": [
-      "{attacker}'s {attack} sweeps through empty air with an embarrassing whoosh.",
-      "The {attack} from {attacker} is wild and uncontrolled — it was never going to land.",
-      "{attacker} over-rotates on the {attack} and stumbles past {defender} entirely."
+      "{attacker}'s {attack} sweep{vs} through empty air with an embarrassing whoosh.",
+      "The {attack} from {attacker} {isAre} wild and uncontrolled — {wasWere} never going to land.",
+      "{attacker} over-rotate{vs} on the {attack} and stumbles past {defender} entirely."
     ],
     "bludgeoning": [
-      "{attacker} brings the {attack} down hard — onto nothing.",
-      "The {attack} from {attacker} crashes into the ground well short of {defender}.",
-      "{attacker} winds up for a massive {attack}... and completely whiffs."
+      "{attacker} bring{vs} the {attack} down hard — onto nothing.",
+      "The {attack} from {attacker} crash{ves} into the ground well short of {defender}.",
+      "{attacker} winds up for a massive {attack}... and completely whiff{vs}."
     ],
     "fire": [
-      "{attacker}'s {attack} dissipates harmlessly before reaching {defender}.",
+      "{attacker}'s {attack} dissipate{vs} harmlessly before reaching {defender}.",
       "The flames from {attacker}'s {attack} gutter and die in the air between them.",
-      "A weak {attack} from {attacker} fizzles out well short of its mark."
+      "{attacker}'s {attack} fizzle{vs} out well short of its mark."
     ],
     "cold": [
-      "{attacker}'s {attack} scatters on the wind before reaching {defender}.",
-      "The chill of {attacker}'s {attack} disperses into nothing — far too weak to matter.",
+      "{attacker}'s {attack} scatter{vs} on the wind before reaching {defender}.",
+      "The chill of {attacker}'s {attack} disperse{vs} into nothing — far too weak to matter.",
       "Ice crystals from the {attack} fall short, {attacker}'s aim completely off."
     ],
     "lightning": [
-      "{attacker}'s {attack} sparks and arcs away into the ground, hitting nothing.",
-      "The {attack} from {attacker} forks wildly and grounds itself well clear of {defender}.",
-      "A crackling {attack} fizzles in {attacker}'s hands before it can even form properly."
+      "{attacker}'s {attack} spark{vs} and arc{vs} away into the ground, hitting nothing.",
+      "The {attack} from {attacker} fork{vs} wildly and ground{vs} itself well clear of {defender}.",
+      "{attacker}'s {attack} fizzle{vs} in their hands before it can even form properly."
     ],
     "thunder": [
-      "{attacker}'s {attack} rolls off in entirely the wrong direction.",
+      "{attacker}'s {attack} roll{vs} off in entirely the wrong direction.",
       "The shockwave from {attacker}'s {attack} dissipates before it reaches {defender}.",
-      "{attacker}'s {attack} lets loose a thunderous blast — that hits nothing."
+      "{attacker}'s {attack} let{vs} loose a thunderous blast — that hits nothing."
     ],
     "acid": [
-      "{attacker}'s {attack} splatters the ground well short of {defender}.",
+      "{attacker}'s {attack} splatter{vs} the ground well short of {defender}.",
       "A glob of corrosive fluid from {attacker}'s {attack} lands nowhere near its target.",
-      "{attacker}'s {attack} sizzles harmlessly into the earth."
+      "{attacker}'s {attack} sizzle{vs} harmlessly into the earth."
     ],
     "poison": [
-      "{attacker}'s {attack} misses completely — the venom wasted.",
-      "The {attack} from {attacker} goes wide, the poison serving no purpose.",
-      "{attacker} lunges with {attack} and hits absolutely nothing."
+      "{attacker}'s {attack} miss{ves} completely — the venom wasted.",
+      "The {attack} from {attacker} go{vs} wide, the poison serving no purpose.",
+      "{attacker}'s {attack} find{vs} absolutely nothing to hit."
     ],
     "necrotic": [
-      "{attacker}'s {attack} bleeds into the ground, touching nothing living.",
-      "The {attack} from {attacker} passes harmlessly through empty space.",
-      "{attacker}'s {attack} unravels before it can find a target."
+      "{attacker}'s {attack} bleed{vs} into the ground, touching nothing living.",
+      "The {attack} from {attacker} pass{ves} harmlessly through empty space.",
+      "{attacker}'s {attack} unravel{vs} before it can find a target."
     ],
     "radiant": [
-      "{attacker}'s {attack} blooms in the wrong direction entirely.",
-      "The {attack} from {attacker} flares and fades, having touched nothing.",
-      "{attacker}'s {attack} blazes wide and illuminates only empty floor."
+      "{attacker}'s {attack} bloom{vs} in the wrong direction entirely.",
+      "The {attack} from {attacker} flare{vs} and fade{vs}, having touched nothing.",
+      "{attacker}'s {attack} blaze{vs} wide and illuminate{vs} only empty floor."
     ],
     "force": [
-      "{attacker}'s {attack} streaks past {defender} and dissipates into the wall.",
-      "The {attack} from {attacker} shunts through empty air.",
-      "{attacker}'s {attack} surges in entirely the wrong direction."
+      "{attacker}'s {attack} streak{vs} past {defender} and dissipates into the wall.",
+      "The {attack} from {attacker} shunt{vs} through empty air.",
+      "{attacker}'s {attack} surge{vs} in entirely the wrong direction."
     ],
     "psychic": [
-      "{attacker}'s {attack} finds no purchase — {defender}'s mind untouched.",
-      "The {attack} from {attacker} glances off nothing of consequence.",
-      "{attacker}'s {attack} grasps only empty thought."
+      "{attacker}'s {attack} find{vs} no purchase — {defender}'s mind untouched.",
+      "The {attack} from {attacker} glance{vs} off nothing of consequence.",
+      "{attacker}'s {attack} grasp{vs} only empty thought."
     ]
   },
 
   "armor": {
     "default": [
-      "The {attack} lands squarely but {defender}'s {armorName} turns it aside.",
-      "{attacker}'s {attack} connects — and stops dead against {defender}'s {armorName}.",
+      "The {attack} land{vs} squarely but {defender}'s {armorName} turns it aside.",
+      "{attacker}'s {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "{defender}'s {armorName} absorbs the hit. {defender} barely registers it.",
       "A solid {attack} from {attacker}, but {defender}'s {armorName} does exactly what it was made to do."
     ],
     "piercing": [
-      "The {attack} finds no gap in {defender}'s {armorName}, skittering off harmlessly.",
-      "{attacker}'s {attack} is stopped cold by {defender}'s {armorName} — no penetration.",
-      "The {attack} bites into {defender}'s {armorName} but fails to punch through."
+      "The {attack} find{vs} no gap in {defender}'s {armorName}, skittering off harmlessly.",
+      "{attacker}'s {attack} {isAre} stopped cold by {defender}'s {armorName} — no penetration.",
+      "The {attack} bite{vs} into {defender}'s {armorName} but fails to punch through."
     ],
     "slashing": [
-      "The {attack} skitters across {defender}'s {armorName} with a harsh screech of metal.",
-      "{attacker}'s {attack} rakes across {defender}'s {armorName} and slides off without purchase.",
+      "The {attack} skitter{vs} across {defender}'s {armorName} with a harsh screech of metal.",
+      "{attacker}'s {attack} rake{vs} across {defender}'s {armorName} and slide{vs} off without purchase.",
       "A ringing {attack} against {defender}'s {armorName} — sparks fly, but no wound follows."
     ],
     "bludgeoning": [
       "{defender}'s {armorName} absorbs the {attack} with a resonant clang.",
-      "The {attack} hammers into {defender}'s {armorName} and transfers harmlessly.",
-      "{attacker} lands the {attack} but {defender}'s {armorName} spreads the force wide."
+      "The {attack} hammer{vs} into {defender}'s {armorName} and transfer{vs} harmlessly.",
+      "{attacker} land{vs} the {attack} but {defender}'s {armorName} spreads the force wide."
     ],
     "fire": [
       "Flames from the {attack} lick across {defender}'s {armorName} but fail to find flesh beneath.",
@@ -151,25 +151,25 @@
 
   "armor_draconic": {
     "default": [
-      "The {attack} glances off {defender}'s hardened draconic scales without leaving a mark.",
-      "{attacker}'s {attack} connects — but {defender}'s scales are tougher than they look.",
+      "The {attack} glance{vs} off {defender}'s hardened draconic scales without leaving a mark.",
+      "{attacker}'s {attack} connect{vs} — but {defender}'s scales are tougher than they look.",
       "Draconic heritage runs deep. That {attack} barely registered on {defender}'s hide.",
       "The scales ripple under the {attack}, shifting with it. {attacker} hits nothing vital."
     ],
     "piercing": [
-      "The {attack} finds no gap in {defender}'s draconic scales.",
-      "{attacker}'s {attack} slides off the interlocking scales — no entry.",
-      "Draconic scales are made for exactly this. The {attack} achieves nothing."
+      "The {attack} find{vs} no gap in {defender}'s draconic scales.",
+      "{attacker}'s {attack} slide{vs} off the interlocking scales — no entry.",
+      "Draconic scales are made for exactly this. The {attack} achieve{vs} nothing."
     ],
     "slashing": [
-      "The {attack} rakes across {defender}'s scales with a sound like drawn steel — no wound.",
-      "{attacker}'s {attack} sparks across the draconic hide and accomplishes nothing.",
+      "The {attack} rake{vs} across {defender}'s scales with a sound like drawn steel — no wound.",
+      "{attacker}'s {attack} spark{vs} across the draconic hide and accomplish{ves} nothing.",
       "Each scale deflects a little of the {attack}. Combined they deflect all of it."
     ],
     "bludgeoning": [
       "The scales flex under the {attack}, spreading it harmlessly.",
       "{defender}'s draconic heritage turns the {attack} into a non-event.",
-      "{attacker}'s {attack} hammers against the scales. They give a little — just enough."
+      "{attacker}'s {attack} hammer{vs} against the scales. They give a little — just enough."
     ],
     "fire": [
       "Fire against draconic scales? {defender} practically yawns at the {attack}.",
@@ -195,24 +195,24 @@
 
   "armor_natural": {
     "default": [
-      "The {attack} strikes {defender}'s natural hide — tough enough to turn it aside.",
+      "The {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the {attack} without complaint.",
-      "{attacker}'s {attack} lands on hardened natural hide and goes no further.",
+      "{attacker}'s {attack} land{vs} on hardened natural hide and go{vs} no further.",
       "Nature gave {defender} their protection. It holds against the {attack}."
     ],
     "piercing": [
-      "The {attack} presses against {defender}'s hide — and goes no further.",
-      "{attacker}'s {attack} is swallowed by {defender}'s thick natural armor.",
+      "The {attack} press{ves} against {defender}'s hide — and go{vs} no further.",
+      "{attacker}'s {attack} {isAre} swallowed by {defender}'s thick natural armor.",
       "Natural hide is deceptively tough. The {attack} can confirm this."
     ],
     "slashing": [
-      "The {attack} skids across {defender}'s thick hide, barely leaving a scratch.",
-      "{attacker}'s {attack} opens no wound — the natural armor is too dense.",
+      "The {attack} skid{vs} across {defender}'s thick hide, barely leaving a scratch.",
+      "{attacker}'s {attack} open{vs} no wound — the natural armor is too dense.",
       "Thick hide sheds the {attack} like it was nothing."
     ],
     "bludgeoning": [
       "{defender}'s natural armor is built for exactly this kind of {attack}.",
-      "The {attack} thuds into {defender}'s hide and transfers nowhere useful.",
+      "The {attack} thud{vs} into {defender}'s hide and transfer{vs} nowhere useful.",
       "Dense natural armor soaks the {attack} and gives {defender} nothing to worry about."
     ],
     "fire": [

@@ -439,14 +439,81 @@ function pickFlavor(langKey, damageType, tokens) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// ATTACK NAME RESOLVER
+// Converts ammo-using weapon attacks into a more natural noun like
+// "arrow" or "bolt" for flavor text instead of the weapon name.
+// ─────────────────────────────────────────────────────────────
+function resolveAmmoItem(weaponItem, actor) {
+    if (!weaponItem || !actor) return null;
+
+    const consumeTarget = weaponItem.system?.consume?.target;
+    if (consumeTarget) {
+        const direct = actor.items?.get?.(consumeTarget);
+        if (direct) return direct;
+
+        const byUuid = actor.items?.find?.(i => i.uuid === consumeTarget);
+        if (byUuid) return byUuid;
+    }
+
+    const ammoCandidates = actor.items?.filter?.(i => {
+        if (i.type !== "consumable") return false;
+        const name = i.name ?? "";
+        return i.system?.consumableType === "ammo" || /arrow|arrows|bolt|bolts|bullet|bullets|dart|darts|shot|shots|ammo|round|rounds/i.test(name);
+    });
+
+    return ammoCandidates?.[0] ?? null;
+}
+
+function inferAmmoDescriptor(itemName, weaponName = "") {
+    const haystack = `${itemName ?? ""} ${weaponName ?? ""}`.toLowerCase();
+
+    if (/arrow|arrows/.test(haystack)) return "arrow";
+    if (/bolt|bolts/.test(haystack)) return "bolt";
+    if (/bullet|bullets|round|rounds/.test(haystack)) return "bullet";
+    if (/dart|darts/.test(haystack)) return "dart";
+    if (/shot|shots|ammo/.test(haystack)) return "shot";
+
+    return null;
+}
+
+function resolveAttackName(options) {
+    const weaponItem = options?.subject?.item;
+    const actor = options?.subject?.actor;
+    const fallbackName = weaponItem?.name ?? options?.subject?.name ?? null;
+
+    if (!weaponItem || weaponItem.type !== "weapon") return fallbackName;
+
+    const usesAmmo = weaponItem.system?.properties?.amm
+        || weaponItem.system?.consume?.type === "ammo"
+        || /bow|crossbow|sling/i.test(weaponItem.name ?? "");
+
+    if (!usesAmmo) return fallbackName;
+
+    const ammoItem = resolveAmmoItem(weaponItem, actor);
+    const descriptor = inferAmmoDescriptor(ammoItem?.name, weaponItem.name);
+
+    if (descriptor) return descriptor;
+
+    if (/crossbow/i.test(weaponItem.name ?? "")) return "bolt";
+    if (/bow/i.test(weaponItem.name ?? "")) return "arrow";
+    if (weaponItem.system?.properties?.amm) return "shot";
+
+    return fallbackName;
+}
+
+// ─────────────────────────────────────────────────────────────
 // FLAVOR HTML BUILDER
 // ─────────────────────────────────────────────────────────────
 function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, layer, defenderActor, damageType) {
     const dexMod = defenderActor.system.abilities.dex.mod;
 
+    const resolvedAttack = attackName ?? "attack";
+    // Heuristic: names ending in 's' are treated as plural (Claws, Talons, Fangs…)
+    const isPlural = /s$/i.test(resolvedAttack);
+
     const tokens = {
         attacker:    attackerName,
-        attack:      attackName ?? "attack",
+        attack:      resolvedAttack,
         defender:    defenderName,
         armorName:   layer.armorName  ?? "",
         shieldName:  layer.shieldName ?? "",
@@ -454,7 +521,14 @@ function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, laye
         dexMod:      dexMod,
         abilityMod:  layer.mod        ?? "",
         abilityAbbr: layer.abbr       ?? "",
+        // Grammar helpers — use in lang file to keep sentences correct for
+        // both singular ("Bite goes") and plural ("Claws go") attack names.
+        vs:      isPlural ? ""     : "s",   // "go{vs}"     → goes / go
+        ves:     isPlural ? ""     : "es",  // "crash{ves}" → crashes / crash
+        isAre:   isPlural ? "are"  : "is",
+        wasWere: isPlural ? "were" : "was",
     };
+    dbg("Attack plurality:", resolvedAttack, isPlural ? "(plural)" : "(singular)");
 
     const langKey  = getLangKey(layer);
     dbg("Flavor lookup — langKey:", langKey, "| damageType:", damageType);
@@ -516,7 +590,7 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
     const attackerName = options?.subject?.actor?.name ?? game.user?.character?.name ?? "The attacker";
     // Prefer item name over activity name — midi-qol replaces the activity
     // name with its own wrapper ("Midi Attack"), but item.name is untouched.
-    const attackName   = options?.subject?.item?.name ?? options?.subject?.name ?? null;
+    const attackName   = resolveAttackName(options);
     const damageType   = getDamageType(options);
     dbg("Roll total:", rollTotal, "| Attacker:", attackerName, "| Attack:", attackName, "| Damage type:", damageType);
 
