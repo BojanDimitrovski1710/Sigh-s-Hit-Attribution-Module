@@ -356,57 +356,112 @@ function findMissLayer(rollTotal, layers) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// FLAVOR TEXT
+// LANG FILE LOADER
+// Loads lang/<code>.json on ready, falls back to en.
 // ─────────────────────────────────────────────────────────────
-function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderActor) {
-    const dexMod = defenderActor.system.abilities.dex.mod;
-    let narrative = "";
+let LANG_DATA = null;
 
-    switch (layer.key) {
-        case "fumble":
-            narrative = `<b>${attackerName}</b> completely fumbles — the attack never had a chance.`;
-            break;
-        case "armor":
-            if (layer.armorName === "Draconic Resilience") {
-                narrative = `The blow glances off <b>${defenderName}</b>'s hardened draconic scales.`;
-            } else if (layer.armorName === "natural armor") {
-                narrative = `The attack strikes <b>${defenderName}</b>'s natural hide — tough enough to turn the blow aside.`;
-            } else {
-                narrative = `The blow lands, but <b>${defenderName}</b>'s <b>${layer.armorName}</b> bears the brunt of the blow.`;
-            }
-            break;
-        case "dex":
-            narrative = `<b>${defenderName}</b> shifts just enough at the last moment — their reflexes (DEX +${dexMod}) pull them clear.`;
-            break;
-        case "secondary-stat":
-            if (layer.source === "natural") {
-                // Racial natural armor with a secondary ability (e.g. Loxodon: 12 + Con)
-                narrative = `The blow strikes <b>${defenderName}</b>'s hide, but their thick natural armor absorbs what remains.`;
-            } else if (layer.abbr === "CON") {
-                // Barbarian unarmored defense
-                narrative = `<b>${defenderName}</b>'s battle-hardened body absorbs the impact — their constitution holds firm.`;
-            } else {
-                // Monk unarmored defense
-                narrative = `<b>${defenderName}</b> flows with preternatural calm, their focused mind sensing the strike just in time.`;
-            }
-            break;
-        case "shield-item":
-            narrative = `<b>${defenderName}</b> raises their <b>${layer.shieldName}</b> and the attack glances off with a clang.`;
-            break;
-        case "shield-spell":
-            narrative = `An invisible barrier flares around <b>${defenderName}</b> — <b>${layer.spellName}</b> swallows the blow entirely.`;
-            break;
-        case "barkskin":
-            narrative = `The attack scrapes across <b>${defenderName}</b>'s bark-hardened skin yet fails to pierce enough to do any significant damage.`;
-            break;
-        case "other":
-            narrative = `<b>${defenderName}</b> is shielded by unseen protections. The attack falls just short.`;
-            break;
-        default:
-            narrative = `<b>${defenderName}</b> narrowly avoids the attack.`;
+async function loadLangData() {
+    const lang      = game.i18n.lang ?? "en";
+    const supported = ["en"]; // add more as translations land
+    const code      = supported.includes(lang) ? lang : "en";
+    try {
+        const resp = await fetch(`modules/${MODULE_ID}/lang/${code}.json`);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        LANG_DATA = await resp.json();
+        dbg(`Lang file loaded: ${code}.json`);
+    } catch (e) {
+        console.warn(`[${MODULE_ID}] Could not load lang file — flavor text will be generic.`, e);
+        LANG_DATA = {};
     }
+}
 
-    // Read settings
+// ─────────────────────────────────────────────────────────────
+// DAMAGE TYPE RESOLVER
+// Tries to read the primary damage type from the attack activity.
+// Returns a lowercase string (e.g. "piercing") or null.
+// ─────────────────────────────────────────────────────────────
+function getDamageType(options) {
+    try {
+        const parts = options?.subject?.damage?.parts;
+        if (parts?.length) {
+            const types = parts[0]?.types;
+            if (types instanceof Set && types.size) return types.values().next().value;
+            if (Array.isArray(types) && types.length) return types[0];
+        }
+        // Fallback: item-level damage
+        const base = options?.subject?.item?.system?.damage?.base;
+        if (base?.types instanceof Set && base.types.size) return base.types.values().next().value;
+    } catch {}
+    return null;
+}
+
+// ─────────────────────────────────────────────────────────────
+// LANG KEY RESOLVER
+// Maps a layer + its metadata to a lang file top-level key.
+// ─────────────────────────────────────────────────────────────
+function getLangKey(layer) {
+    switch (layer.key) {
+        case "armor":
+            if (layer.armorName === "Draconic Resilience") return "armor_draconic";
+            if (layer.armorName === "natural armor")       return "armor_natural";
+            return "armor";
+        case "secondary-stat":
+            if (layer.source === "natural") return "secondary_natural";
+            if (layer.abbr   === "CON")     return "secondary_con";
+            if (layer.abbr   === "WIS")     return "secondary_wis";
+            return "secondary_con"; // fallback
+        case "shield-item":  return "shield_item";
+        case "shield-spell": return "shield_spell";
+        default:
+            return layer.key.replace(/-/g, "_"); // fumble, dex, barkskin, other
+    }
+}
+
+// ─────────────────────────────────────────────────────────────
+// RANDOM FLAVOR PICKER
+// Looks up lang[langKey][damageType], falls back to [langKey]["default"],
+// then to a hard-coded generic. Replaces {token} placeholders.
+// ─────────────────────────────────────────────────────────────
+function pickFlavor(langKey, damageType, tokens) {
+    const section = LANG_DATA?.[langKey];
+    const pool    = (damageType && section?.[damageType]?.length)
+        ? section[damageType]
+        : section?.default;
+
+    const template = pool?.length
+        ? pool[Math.floor(Math.random() * pool.length)]
+        : "{defender} narrowly avoids the attack.";
+
+    return template.replace(/\{(\w+)\}/g, (_, key) =>
+        tokens[key] !== undefined ? `<b>${tokens[key]}</b>` : `{${key}}`
+    );
+}
+
+// ─────────────────────────────────────────────────────────────
+// FLAVOR HTML BUILDER
+// ─────────────────────────────────────────────────────────────
+function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, layer, defenderActor, damageType) {
+    const dexMod = defenderActor.system.abilities.dex.mod;
+
+    const tokens = {
+        attacker:    attackerName,
+        attack:      attackName ?? "attack",
+        defender:    defenderName,
+        armorName:   layer.armorName  ?? "",
+        shieldName:  layer.shieldName ?? "",
+        spellName:   layer.spellName  ?? "",
+        dexMod:      dexMod,
+        abilityMod:  layer.mod        ?? "",
+        abilityAbbr: layer.abbr       ?? "",
+    };
+
+    const langKey  = getLangKey(layer);
+    dbg("Flavor lookup — langKey:", langKey, "| damageType:", damageType);
+
+    const narrative = pickFlavor(langKey, damageType, tokens);
+
+    // ── Styling ───────────────────────────────────────────────
     const showRollInfo = game.settings.get(MODULE_ID, "showRollInfo");
     const bgColor      = game.settings.get(MODULE_ID, "bgColor");
     const bgOpacity    = game.settings.get(MODULE_ID, "bgOpacity");
@@ -415,8 +470,6 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
     const borderColor  = game.settings.get(MODULE_ID, "borderColor");
     const iconColor    = game.settings.get(MODULE_ID, "iconColor");
 
-    // Convert hex color + opacity into rgba for the background
-    // ColorField returns a Foundry Color object, so coerce to string first
     const hex = String(bgColor).replace("#", "");
     const r   = parseInt(hex.substring(0, 2), 16);
     const g   = parseInt(hex.substring(2, 4), 16);
@@ -445,6 +498,8 @@ function buildFlavorHTML(rollTotal, attackerName, defenderName, layer, defenderA
 </div>`.trim();
 }
 
+Hooks.on("ready", () => loadLangData());
+
 // ─────────────────────────────────────────────────────────────
 // MAIN HOOK
 // ─────────────────────────────────────────────────────────────
@@ -459,7 +514,11 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
 
     const rollTotal    = roll.total;
     const attackerName = options?.subject?.actor?.name ?? game.user?.character?.name ?? "The attacker";
-    dbg("Roll total:", rollTotal, "| Attacker:", attackerName);
+    // Prefer item name over activity name — midi-qol replaces the activity
+    // name with its own wrapper ("Midi Attack"), but item.name is untouched.
+    const attackName   = options?.subject?.item?.name ?? options?.subject?.name ?? null;
+    const damageType   = getDamageType(options);
+    dbg("Roll total:", rollTotal, "| Attacker:", attackerName, "| Attack:", attackName, "| Damage type:", damageType);
 
     const targets = game.user.targets;
     dbg("Targets:", targets?.size ?? 0, [...(targets ?? [])].map(t => t.name));
@@ -496,7 +555,7 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
         const missLayer = findMissLayer(rollTotal, layers);
         dbg("Miss layer resolved:", missLayer.key, missLayer);
 
-        const content = buildFlavorHTML(rollTotal, attackerName, defenderName, missLayer, targetActor);
+        const content = buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, missLayer, targetActor, damageType);
         dbg("Sending chat message");
 
         await ChatMessage.create({
