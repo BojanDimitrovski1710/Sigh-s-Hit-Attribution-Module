@@ -148,3 +148,8 @@ the full layer stack that was built, and which layer the roll resolved to.
   untargeted attacks are skipped.
 - If an actor's AC can't be read (`system.attributes.ac.value` is
   `null`/`undefined`), that target is silently skipped.
+
+  ## Bounty Board
+
+  - Add support for cover
+  - Add support for magic items and effects that add to ac (ring of protection, alchemist alchemical brew)
