@@ -151,5 +151,6 @@ the full layer stack that was built, and which layer the roll resolved to.
 
 ## Bounty Board
 
-- Add support for cover
+- Add support for cover systems that add to AC
 - Add support for magic items and effects that add to ac (ring of protection, alchemist alchemical brew)
+- Add support for dynamic effects that effect hits (fighting styles, some reactions)
