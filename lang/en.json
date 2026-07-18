@@ -72,7 +72,7 @@
       "{attacker}'s {attack} fizzle{vs} in their hands before it can even form properly.",
       "{attacker}'s crackling {attack} sail{vs} hopelessly wide of {defender}.",
       "The jagged spark of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
-      "{attacker} overcommits on a searing {attack}, and the charge goes nowhere near {defender}.",
+      "{attacker} overcommits on a arcing {attack}, and the charge goes nowhere near {defender}.",
       "The arc behind {attacker}'s {attack} fizzles out long before it reaches {defender}.",
       "{attacker}'s aim is off from the start — the jagged {attack} find{vs} only empty air.",
       "A stray charge is all that's left of {attacker}'s {attack} — {defender} was never in danger."
@@ -227,7 +227,7 @@
       "{attacker}'s {attack} races across {defender}'s {armorName} and finds nowhere to go.",
       "The crackling {attack} land{vs} squarely, but {defender}'s {armorName} turns the arc aside.",
       "{defender}'s {armorName} takes the full spark of the {attack} and shrugs it off.",
-      "A searing {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
+      "A arcing {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "The arc of the {attack} spreads harmlessly across {defender}'s {armorName}.",
       "{defender}'s {armorName} was built for exactly this kind of spark — the {attack} prove{vs} it.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender}'s {armorName} has carried worse."
@@ -382,7 +382,7 @@
       "{defender}'s scales conduct the {attack}'s lightning away before it can do harm.",
       "The crackling {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
       "{defender}'s scales shrug off the spark like it was nothing.",
-      "A searing {attack} meet{vs} interlocking scales and find{vs} no way through.",
+      "A arcing {attack} meet{vs} interlocking scales and find{vs} no way through.",
       "The arc washes across {defender}'s draconic hide and dissipates.",
       "{defender}'s draconic heritage was built to shrug off exactly this kind of spark.",
       "{attacker}'s {attack} deliver{vs} real charge, but the scales have weathered worse."
@@ -527,7 +527,7 @@
     "lightning": [
       "The crackling {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the spark without complaint.",
-      "A searing {attack} press{ves} against thick hide and get{vs} no further.",
+      "A arcing {attack} press{ves} against thick hide and get{vs} no further.",
       "The arc of the {attack} spreads across {defender}'s hide and fades.",
       "{defender}'s hide was made for exactly this kind of spark.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender}'s hide has weathered worse."
@@ -747,7 +747,7 @@
       "A pinpoint {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this point before. They stand.",
       "The {attack}'s puncture sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s pinpoint {attack} hit{vs} hard, but {defender}'s constitution shrugs off the jab."
     ],
     "slashing": [
       "The {attack} opens a line — and stops. {defender}'s constitution is as thick as their hide.",
@@ -758,7 +758,7 @@
       "A keen-edged {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this cut before. They stand.",
       "The {attack}'s gash sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s keen-edged {attack} hit{vs} hard, but {defender}'s constitution shrugs off the slice."
     ],
     "bludgeoning": [
       "The {attack} is bone-rattling. {defender}'s bones just don't rattle.",
@@ -769,7 +769,7 @@
       "A heavy {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this impact before. They stand.",
       "The {attack}'s blow sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s heavy {attack} hit{vs} hard, but {defender}'s constitution shrugs off the weight."
     ],
     "fire": [
       "{defender} has taken {attack}s before. They've taken worse. They stand.",
@@ -780,7 +780,7 @@
       "A smoldering {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this heat before. They stand.",
       "The {attack}'s flame sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s smoldering {attack} hit{vs} hard, but {defender}'s constitution shrugs off the ember."
     ],
     "cold": [
       "{defender} shudders once from the {attack} — and shakes it off. Constitution runs deep.",
@@ -791,7 +791,7 @@
       "A numbing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this chill before. They stand.",
       "The {attack}'s frost sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s numbing {attack} hit{vs} hard, but {defender}'s constitution shrugs off the ice."
     ],
     "necrotic": [
       "The {attack}'s necrotic energy bores into {defender}. Their constitution fights it to a standstill.",
@@ -802,15 +802,15 @@
       "A unraveling {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this decay before. They stand.",
       "The {attack}'s blight sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s unraveling {attack} hit{vs} hard, but {defender}'s constitution shrugs off the rot."
     ],
     "lightning": [
       "The arc of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
       "{defender}'s battle-hardened body absorbs the spark — sheer toughness holds.",
-      "A searing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
+      "A arcing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this arc before. They stand.",
       "The {attack}'s spark sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s arcing {attack} hit{vs} hard, but {defender}'s constitution shrugs off the charge."
     ],
     "thunder": [
       "The shockwave of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -818,7 +818,7 @@
       "A thunderous {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this shockwave before. They stand.",
       "The {attack}'s blast sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s thunderous {attack} hit{vs} hard, but {defender}'s constitution shrugs off the clap."
     ],
     "acid": [
       "The spray of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -826,7 +826,7 @@
       "A dissolving {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this spray before. They stand.",
       "The {attack}'s splash sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s dissolving {attack} hit{vs} hard, but {defender}'s constitution shrugs off the etch."
     ],
     "poison": [
       "The toxin of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -834,7 +834,7 @@
       "A noxious {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this toxin before. They stand.",
       "The {attack}'s venom sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s noxious {attack} hit{vs} hard, but {defender}'s constitution shrugs off the dose."
     ],
     "radiant": [
       "The light of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -842,7 +842,7 @@
       "A searing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this light before. They stand.",
       "The {attack}'s glow sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s searing {attack} hit{vs} hard, but {defender}'s constitution shrugs off the radiance."
     ],
     "force": [
       "The pressure of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -850,7 +850,7 @@
       "A telekinetic {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this pressure before. They stand.",
       "The {attack}'s force sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s telekinetic {attack} hit{vs} hard, but {defender}'s constitution shrugs off the surge."
     ],
     "psychic": [
       "The whisper of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -858,7 +858,7 @@
       "A probing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this whisper before. They stand.",
       "The {attack}'s dread sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s {attack} hit{vs} hard, but {defender}'s constitution hits back harder."
+      "{attacker}'s probing {attack} hit{vs} hard, but {defender}'s constitution shrugs off the pressure."
     ]
   },
   "secondary_wis": {
@@ -1005,7 +1005,7 @@
       "The {attack}'s force travels through {defender}'s thick body and disperses without meaningful harm.",
       "{defender}'s constitution-reinforced frame absorbs the {attack} like it was expected.",
       "The impact of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the blow that the hide alone couldn't stop.",
       "The heavy {attack} run{vs} out of weight long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s impact finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the blow without complaint.",
@@ -1016,7 +1016,7 @@
       "Layers of toughness — the {attack} runs out of momentum before {defender} runs out of body.",
       "{defender}'s natural mass stops the {attack} cold.",
       "The point of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the puncture that the hide alone couldn't stop.",
       "The pinpoint {attack} run{vs} out of jab long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s point finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the puncture without complaint.",
@@ -1024,7 +1024,7 @@
     ],
     "slashing": [
       "The cut of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the gash that the hide alone couldn't stop.",
       "The keen-edged {attack} run{vs} out of slice long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s cut finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the gash without complaint.",
@@ -1032,7 +1032,7 @@
     ],
     "fire": [
       "The heat of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the flame that the hide alone couldn't stop.",
       "The smoldering {attack} run{vs} out of ember long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s heat finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the flame without complaint.",
@@ -1040,7 +1040,7 @@
     ],
     "cold": [
       "The chill of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the frost that the hide alone couldn't stop.",
       "The numbing {attack} run{vs} out of ice long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s chill finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the frost without complaint.",
@@ -1048,15 +1048,15 @@
     ],
     "lightning": [
       "The arc of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
-      "The searing {attack} run{vs} out of charge long before {defender} runs out of anything.",
+      "{defender}'s thick frame absorbs the spark that the hide alone couldn't stop.",
+      "The arcing {attack} run{vs} out of charge long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s arc finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the spark without complaint.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender} is built from the same stuff twice over."
     ],
     "thunder": [
       "The shockwave of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the blast that the hide alone couldn't stop.",
       "The thunderous {attack} run{vs} out of clap long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s shockwave finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the blast without complaint.",
@@ -1064,7 +1064,7 @@
     ],
     "acid": [
       "The spray of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the splash that the hide alone couldn't stop.",
       "The dissolving {attack} run{vs} out of etch long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s spray finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the splash without complaint.",
@@ -1072,7 +1072,7 @@
     ],
     "poison": [
       "The toxin of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the venom that the hide alone couldn't stop.",
       "The noxious {attack} run{vs} out of dose long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s toxin finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the venom without complaint.",
@@ -1080,7 +1080,7 @@
     ],
     "necrotic": [
       "The decay of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the blight that the hide alone couldn't stop.",
       "The unraveling {attack} run{vs} out of rot long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s decay finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the blight without complaint.",
@@ -1088,7 +1088,7 @@
     ],
     "radiant": [
       "The light of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the glow that the hide alone couldn't stop.",
       "The searing {attack} run{vs} out of radiance long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s light finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the glow without complaint.",
@@ -1096,7 +1096,7 @@
     ],
     "force": [
       "The pressure of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the force that the hide alone couldn't stop.",
       "The telekinetic {attack} run{vs} out of surge long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s pressure finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the force without complaint.",
@@ -1104,7 +1104,7 @@
     ],
     "psychic": [
       "The whisper of the {attack} meets hide and constitution together — neither yields.",
-      "{defender}'s thick frame absorbs what the hide alone couldn't stop.",
+      "{defender}'s thick frame absorbs the dread that the hide alone couldn't stop.",
       "The probing {attack} run{vs} out of pressure long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s whisper finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the dread without complaint.",
