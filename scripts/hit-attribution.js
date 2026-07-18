@@ -397,6 +397,26 @@ function getDamageType(options) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// ATTACK RANGE RESOLVER
+// Reads the Attack Activity's attackType ("melee"/"ranged"). Falls back to
+// ammo/bow-type heuristics when the activity doesn't expose it.
+// Returns "melee", "ranged", or null.
+// ─────────────────────────────────────────────────────────────
+function getAttackRange(options) {
+    const attackType = options?.subject?.attackType;
+    if (attackType === "melee" || attackType === "ranged") return attackType;
+
+    const weaponItem = options?.subject?.item;
+    if (weaponItem?.type === "weapon") {
+        const usesAmmo = weaponItem.system?.properties?.amm
+            || weaponItem.system?.consume?.type === "ammo"
+            || /bow|crossbow|sling/i.test(weaponItem.name ?? "");
+        return usesAmmo ? "ranged" : "melee";
+    }
+    return null;
+}
+
+// ─────────────────────────────────────────────────────────────
 // LANG KEY RESOLVER
 // Maps a layer + its metadata to a lang file top-level key.
 // ─────────────────────────────────────────────────────────────
@@ -420,14 +440,24 @@ function getLangKey(layer) {
 
 // ─────────────────────────────────────────────────────────────
 // RANDOM FLAVOR PICKER
-// Looks up lang[langKey][damageType], falls back to [langKey]["default"],
-// then to a hard-coded generic. Replaces {token} placeholders.
+// Looks up lang[langKey][damageType]. A damage-type entry is either a flat
+// array (range-agnostic) or an { any, melee, ranged } object — when it's the
+// latter, "melee"/"ranged" is preferred based on the resolved attack range,
+// falling back to "any". Falls back to [langKey]["default"], then to a
+// hard-coded generic. Replaces {token} placeholders.
 // ─────────────────────────────────────────────────────────────
-function pickFlavor(langKey, damageType, tokens) {
+function pickFlavor(langKey, damageType, range, tokens) {
     const section = LANG_DATA?.[langKey];
-    const pool    = (damageType && section?.[damageType]?.length)
-        ? section[damageType]
-        : section?.default;
+    const dtEntry  = damageType ? section?.[damageType] : null;
+
+    let pool = null;
+    if (Array.isArray(dtEntry)) {
+        pool = dtEntry;
+    } else if (dtEntry) {
+        if (range && dtEntry[range]?.length) pool = dtEntry[range];
+        else if (dtEntry.any?.length) pool = dtEntry.any;
+    }
+    if (!pool?.length) pool = section?.default;
 
     const template = pool?.length
         ? pool[Math.floor(Math.random() * pool.length)]
@@ -504,7 +534,7 @@ function resolveAttackName(options) {
 // ─────────────────────────────────────────────────────────────
 // FLAVOR HTML BUILDER
 // ─────────────────────────────────────────────────────────────
-function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, layer, defenderActor, damageType) {
+function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, layer, defenderActor, damageType, range) {
     const dexMod = defenderActor.system.abilities.dex.mod;
 
     const resolvedAttack = attackName ?? "attack";
@@ -531,9 +561,9 @@ function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, laye
     dbg("Attack plurality:", resolvedAttack, isPlural ? "(plural)" : "(singular)");
 
     const langKey  = getLangKey(layer);
-    dbg("Flavor lookup — langKey:", langKey, "| damageType:", damageType);
+    dbg("Flavor lookup — langKey:", langKey, "| damageType:", damageType, "| range:", range);
 
-    const narrative = pickFlavor(langKey, damageType, tokens);
+    const narrative = pickFlavor(langKey, damageType, range, tokens);
 
     // ── Styling ───────────────────────────────────────────────
     const showRollInfo = game.settings.get(MODULE_ID, "showRollInfo");
@@ -592,7 +622,8 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
     // name with its own wrapper ("Midi Attack"), but item.name is untouched.
     const attackName   = resolveAttackName(options);
     const damageType   = getDamageType(options);
-    dbg("Roll total:", rollTotal, "| Attacker:", attackerName, "| Attack:", attackName, "| Damage type:", damageType);
+    const attackRange  = getAttackRange(options);
+    dbg("Roll total:", rollTotal, "| Attacker:", attackerName, "| Attack:", attackName, "| Damage type:", damageType, "| Range:", attackRange);
 
     const targets = game.user.targets;
     dbg("Targets:", targets?.size ?? 0, [...(targets ?? [])].map(t => t.name));
@@ -629,7 +660,7 @@ Hooks.on("dnd5e.rollAttackV2", async (rolls, options) => {
         const missLayer = findMissLayer(rollTotal, layers);
         dbg("Miss layer resolved:", missLayer.key, missLayer);
 
-        const content = buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, missLayer, targetActor, damageType);
+        const content = buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, missLayer, targetActor, damageType, attackRange);
         dbg("Sending chat message");
 
         await ChatMessage.create({
