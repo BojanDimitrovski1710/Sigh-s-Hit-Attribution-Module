@@ -72,7 +72,7 @@
       "{attacker}'s {attack} fizzle{vs} in their hands before it can even form properly.",
       "{attacker}'s crackling {attack} sail{vs} hopelessly wide of {defender}.",
       "The jagged spark of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
-      "{attacker} overcommits on a arcing {attack}, and the charge goes nowhere near {defender}.",
+      "{attacker} overcommits on a surging {attack}, and the charge goes nowhere near {defender}.",
       "The arc behind {attacker}'s {attack} fizzles out long before it reaches {defender}.",
       "{attacker}'s aim is off from the start — the jagged {attack} find{vs} only empty air.",
       "A stray charge is all that's left of {attacker}'s {attack} — {defender} was never in danger."
@@ -116,7 +116,7 @@
       "{attacker}'s {attack} unravel{vs} before it can find a target.",
       "{attacker}'s withering {attack} sail{vs} hopelessly wide of {defender}.",
       "The draining blight of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
-      "{attacker} overcommits on a unraveling {attack}, and the rot goes nowhere near {defender}.",
+      "{attacker} overcommits on a creeping {attack}, and the rot goes nowhere near {defender}.",
       "The decay behind {attacker}'s {attack} fizzles out long before it reaches {defender}.",
       "{attacker}'s aim is off from the start — the draining {attack} find{vs} only empty air.",
       "A stray rot is all that's left of {attacker}'s {attack} — {defender} was never in danger."
@@ -136,7 +136,7 @@
       "{attacker}'s {attack} streak{vs} past {defender} and dissipates into the wall.",
       "The {attack} from {attacker} shunt{vs} through empty air.",
       "{attacker}'s {attack} surge{vs} in entirely the wrong direction.",
-      "{attacker}'s invisible {attack} sail{vs} hopelessly wide of {defender}.",
+      "{attacker}'s silent {attack} sail{vs} hopelessly wide of {defender}.",
       "The raw force of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
       "{attacker} overcommits on a telekinetic {attack}, and the surge goes nowhere near {defender}.",
       "The pressure behind {attacker}'s {attack} fizzles out long before it reaches {defender}.",
@@ -147,11 +147,11 @@
       "{attacker}'s {attack} find{vs} no purchase — {defender}'s mind untouched.",
       "The {attack} from {attacker} glance{vs} off nothing of consequence.",
       "{attacker}'s {attack} grasp{vs} only empty thought.",
-      "{attacker}'s intrusive {attack} sail{vs} hopelessly wide of {defender}.",
-      "The unsettling dread of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
+      "{attacker}'s prying {attack} sail{vs} hopelessly wide of {defender}.",
+      "The gnawing dread of {attacker}'s {attack} amounts to nothing — {defender} is never even threatened.",
       "{attacker} overcommits on a probing {attack}, and the pressure goes nowhere near {defender}.",
       "The whisper behind {attacker}'s {attack} fizzles out long before it reaches {defender}.",
-      "{attacker}'s aim is off from the start — the unsettling {attack} find{vs} only empty air.",
+      "{attacker}'s aim is off from the start — the gnawing {attack} find{vs} only empty air.",
       "A stray pressure is all that's left of {attacker}'s {attack} — {defender} was never in danger."
     ]
   },
@@ -227,7 +227,7 @@
       "{attacker}'s {attack} races across {defender}'s {armorName} and finds nowhere to go.",
       "The crackling {attack} land{vs} squarely, but {defender}'s {armorName} turns the arc aside.",
       "{defender}'s {armorName} takes the full spark of the {attack} and shrugs it off.",
-      "A arcing {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
+      "A surging {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "The arc of the {attack} spreads harmlessly across {defender}'s {armorName}.",
       "{defender}'s {armorName} was built for exactly this kind of spark — the {attack} prove{vs} it.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender}'s {armorName} has carried worse."
@@ -271,7 +271,7 @@
       "The death energy bleeds away across {defender}'s {armorName}, spent without purpose.",
       "The withering {attack} land{vs} squarely, but {defender}'s {armorName} turns the decay aside.",
       "{defender}'s {armorName} takes the full blight of the {attack} and shrugs it off.",
-      "A unraveling {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
+      "A creeping {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "The decay of the {attack} spreads harmlessly across {defender}'s {armorName}.",
       "{defender}'s {armorName} was built for exactly this kind of blight — the {attack} prove{vs} it.",
       "{attacker}'s {attack} deliver{vs} real rot, but {defender}'s {armorName} has carried worse."
@@ -291,7 +291,7 @@
       "The force of the {attack} staggers {defender}'s {armorName} but transfers no real harm.",
       "Raw force from the {attack} slams into {defender}'s {armorName} and fails to penetrate.",
       "{attacker}'s {attack} meets {defender}'s {armorName} — and loses.",
-      "The invisible {attack} land{vs} squarely, but {defender}'s {armorName} turns the pressure aside.",
+      "The silent {attack} land{vs} squarely, but {defender}'s {armorName} turns the pressure aside.",
       "{defender}'s {armorName} takes the full force of the {attack} and shrugs it off.",
       "A telekinetic {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "The pressure of the {attack} spreads harmlessly across {defender}'s {armorName}.",
@@ -302,7 +302,7 @@
       "The {attack} ripples across {defender}'s {armorName}. Odd, but {defender} is unaffected.",
       "{defender}'s {armorName} somehow grounds the {attack}. {defender} blinks, confused but unharmed.",
       "Mental force washes over {defender}'s {armorName} — the armor's inert bulk immune to such things.",
-      "The intrusive {attack} land{vs} squarely, but {defender}'s {armorName} turns the whisper aside.",
+      "The prying {attack} land{vs} squarely, but {defender}'s {armorName} turns the whisper aside.",
       "{defender}'s {armorName} takes the full dread of the {attack} and shrugs it off.",
       "A probing {attack} connect{vs} — and stop{vs} dead against {defender}'s {armorName}.",
       "The whisper of the {attack} spreads harmlessly across {defender}'s {armorName}.",
@@ -382,7 +382,7 @@
       "{defender}'s scales conduct the {attack}'s lightning away before it can do harm.",
       "The crackling {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
       "{defender}'s scales shrug off the spark like it was nothing.",
-      "A arcing {attack} meet{vs} interlocking scales and find{vs} no way through.",
+      "A surging {attack} meet{vs} interlocking scales and find{vs} no way through.",
       "The arc washes across {defender}'s draconic hide and dissipates.",
       "{defender}'s draconic heritage was built to shrug off exactly this kind of spark.",
       "{attacker}'s {attack} deliver{vs} real charge, but the scales have weathered worse."
@@ -417,7 +417,7 @@
     "necrotic": [
       "The withering {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
       "{defender}'s scales shrug off the blight like it was nothing.",
-      "A unraveling {attack} meet{vs} interlocking scales and find{vs} no way through.",
+      "A creeping {attack} meet{vs} interlocking scales and find{vs} no way through.",
       "The decay washes across {defender}'s draconic hide and dissipates.",
       "{defender}'s draconic heritage was built to shrug off exactly this kind of blight.",
       "{attacker}'s {attack} deliver{vs} real rot, but the scales have weathered worse."
@@ -431,7 +431,7 @@
       "{attacker}'s {attack} deliver{vs} real radiance, but the scales have weathered worse."
     ],
     "force": [
-      "The invisible {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
+      "The silent {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
       "{defender}'s scales shrug off the force like it was nothing.",
       "A telekinetic {attack} meet{vs} interlocking scales and find{vs} no way through.",
       "The pressure washes across {defender}'s draconic hide and dissipates.",
@@ -439,7 +439,7 @@
       "{attacker}'s {attack} deliver{vs} real surge, but the scales have weathered worse."
     ],
     "psychic": [
-      "The intrusive {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
+      "The prying {attack} glance{vs} off {defender}'s draconic scales without leaving a mark.",
       "{defender}'s scales shrug off the dread like it was nothing.",
       "A probing {attack} meet{vs} interlocking scales and find{vs} no way through.",
       "The whisper washes across {defender}'s draconic hide and dissipates.",
@@ -527,7 +527,7 @@
     "lightning": [
       "The crackling {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the spark without complaint.",
-      "A arcing {attack} press{ves} against thick hide and get{vs} no further.",
+      "A surging {attack} press{ves} against thick hide and get{vs} no further.",
       "The arc of the {attack} spreads across {defender}'s hide and fades.",
       "{defender}'s hide was made for exactly this kind of spark.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender}'s hide has weathered worse."
@@ -551,7 +551,7 @@
     "necrotic": [
       "The withering {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the blight without complaint.",
-      "A unraveling {attack} press{ves} against thick hide and get{vs} no further.",
+      "A creeping {attack} press{ves} against thick hide and get{vs} no further.",
       "The decay of the {attack} spreads across {defender}'s hide and fades.",
       "{defender}'s hide was made for exactly this kind of blight.",
       "{attacker}'s {attack} deliver{vs} real rot, but {defender}'s hide has weathered worse."
@@ -565,7 +565,7 @@
       "{attacker}'s {attack} deliver{vs} real radiance, but {defender}'s hide has weathered worse."
     ],
     "force": [
-      "The invisible {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
+      "The silent {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the force without complaint.",
       "A telekinetic {attack} press{ves} against thick hide and get{vs} no further.",
       "The pressure of the {attack} spreads across {defender}'s hide and fades.",
@@ -573,7 +573,7 @@
       "{attacker}'s {attack} deliver{vs} real surge, but {defender}'s hide has weathered worse."
     ],
     "psychic": [
-      "The intrusive {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
+      "The prying {attack} strike{vs} {defender}'s natural hide — tough enough to turn it aside.",
       "{defender}'s natural armor absorbs the dread without complaint.",
       "A probing {attack} press{ves} against thick hide and get{vs} no further.",
       "The whisper of the {attack} spreads across {defender}'s hide and fades.",
@@ -673,7 +673,7 @@
       "{defender} sidesteps the {attack} — felt it displace the air as it passed.",
       "The {attack} hits nothing — {defender} was a half-step ahead of it.",
       "The {attack} shunts through empty space where {defender} no longer stands.",
-      "{defender} slips clear of the invisible {attack}, leaving only pressure where they stood.",
+      "{defender} slips clear of the silent {attack}, leaving only pressure where they stood.",
       "A half-step is all {defender} needs — the {attack} find{vs} nothing but force.",
       "{defender} reads the surge of the {attack} early and steps outside it entirely.",
       "Quick reflexes carry {defender} clear of the {attack}'s pressure before it can catch them.",
@@ -684,11 +684,11 @@
       "{defender}'s mind flickers away from the {attack} before it can gain a foothold.",
       "Awareness lets {defender} sense the {attack} coming — and slip aside.",
       "The {attack} finds {defender}'s mind — but only its retreating edge.",
-      "{defender} slips clear of the intrusive {attack}, leaving only whisper where they stood.",
+      "{defender} slips clear of the prying {attack}, leaving only whisper where they stood.",
       "A half-step is all {defender} needs — the {attack} find{vs} nothing but dread.",
       "{defender} reads the pressure of the {attack} early and steps outside it entirely.",
       "Quick reflexes carry {defender} clear of the {attack}'s whisper before it can catch them.",
-      "{defender} was already moving when the unsettling {attack} arrived — a half-second too late.",
+      "{defender} was already moving when the gnawing {attack} arrived — a half-second too late.",
       "The {attack} hit{vs} the spot {defender} just vacated — reflexes (DEX +{dexMod}) beat the pressure."
     ],
     "necrotic": [
@@ -799,18 +799,18 @@
       "{defender}'s constitution is not a subtle thing. It simply refuses the {attack}.",
       "The decay of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
       "{defender}'s battle-hardened body absorbs the blight — sheer toughness holds.",
-      "A unraveling {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
+      "A creeping {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this decay before. They stand.",
       "The {attack}'s blight sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s unraveling {attack} hit{vs} hard, but {defender}'s constitution shrugs off the rot."
+      "{attacker}'s creeping {attack} hit{vs} hard, but {defender}'s constitution shrugs off the rot."
     ],
     "lightning": [
       "The arc of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
       "{defender}'s battle-hardened body absorbs the spark — sheer toughness holds.",
-      "A arcing {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
+      "A surging {attack} find{vs} flesh toughened far beyond the norm. Not enough.",
       "{defender} has taken worse than this arc before. They stand.",
       "The {attack}'s spark sinks in — and {defender}'s constitution pushes it back out.",
-      "{attacker}'s arcing {attack} hit{vs} hard, but {defender}'s constitution shrugs off the charge."
+      "{attacker}'s surging {attack} hit{vs} hard, but {defender}'s constitution shrugs off the charge."
     ],
     "thunder": [
       "The shockwave of the {attack} lands somewhere it should have mattered. {defender}'s constitution disagrees.",
@@ -898,7 +898,7 @@
       "{defender}'s disciplined mind closes like a fist around the {attack} — then expels it.",
       "Mental training runs deep in {defender}. The {attack} finds nothing to grip.",
       "{defender}'s inner stillness is a wall. The {attack} breaks on it.",
-      "{defender}'s focused mind senses the intrusive {attack} coming and simply isn't there for it.",
+      "{defender}'s focused mind senses the prying {attack} coming and simply isn't there for it.",
       "Stillness and awareness are {defender}'s armor — the dread finds no opening.",
       "{defender} reads the {attack}'s pressure through something beyond instinct and steps clear.",
       "There is no gap in {defender}'s awareness for the whisper to exploit.",
@@ -909,7 +909,7 @@
       "Awareness of intent lets {defender} respond to the {attack} before it fully manifests.",
       "{defender}'s trained mind perceives the {attack} and moves accordingly.",
       "The {attack} arrives. {defender}'s wisdom already had them moving.",
-      "{defender}'s focused mind senses the invisible {attack} coming and simply isn't there for it.",
+      "{defender}'s focused mind senses the silent {attack} coming and simply isn't there for it.",
       "Stillness and awareness are {defender}'s armor — the force finds no opening.",
       "{defender} reads the {attack}'s surge through something beyond instinct and steps clear.",
       "There is no gap in {defender}'s awareness for the pressure to exploit.",
@@ -1049,7 +1049,7 @@
     "lightning": [
       "The arc of the {attack} meets hide and constitution together — neither yields.",
       "{defender}'s thick frame absorbs the spark that the hide alone couldn't stop.",
-      "The arcing {attack} run{vs} out of charge long before {defender} runs out of anything.",
+      "The surging {attack} run{vs} out of charge long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s arc finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the spark without complaint.",
       "{attacker}'s {attack} deliver{vs} real charge, but {defender} is built from the same stuff twice over."
@@ -1081,7 +1081,7 @@
     "necrotic": [
       "The decay of the {attack} meets hide and constitution together — neither yields.",
       "{defender}'s thick frame absorbs the blight that the hide alone couldn't stop.",
-      "The unraveling {attack} run{vs} out of rot long before {defender} runs out of anything.",
+      "The creeping {attack} run{vs} out of rot long before {defender} runs out of anything.",
       "Body and hide work together — the {attack}'s decay finds no vulnerable seam.",
       "{defender}'s natural toughness, inside and out, soaks up the blight without complaint.",
       "{attacker}'s {attack} deliver{vs} real rot, but {defender} is built from the same stuff twice over."
@@ -1203,7 +1203,7 @@
       "Invisible force from the {attack} hammers {defender}'s {shieldName} — transmitted to {defender}'s arm. They hold.",
       "{defender} braces {defender}'s {shieldName} against the {attack}. Braced things tend to hold.",
       "The {attack}'s raw force hits {defender}'s {shieldName} and goes nowhere useful.",
-      "{defender} raises {defender}'s {shieldName} just in time — the invisible {attack} glance{vs} off with a clang.",
+      "{defender} raises {defender}'s {shieldName} just in time — the silent {attack} glance{vs} off with a clang.",
       "The force of the {attack} lands on {defender}'s {shieldName} and goes no further.",
       "{defender} angles {defender}'s {shieldName} to catch the {attack} — the surge skitters off harmlessly.",
       "A well-placed {shieldName} and the {attack}'s pressure is completely neutralized.",
@@ -1243,11 +1243,11 @@
       "{attacker}'s {attack} deliver{vs} real radiance, but {defender}'s {shieldName} has carried worse."
     ],
     "psychic": [
-      "{defender} raises {defender}'s {shieldName} just in time — the intrusive {attack} glance{vs} off with a clang.",
+      "{defender} raises {defender}'s {shieldName} just in time — the prying {attack} glance{vs} off with a clang.",
       "The dread of the {attack} lands on {defender}'s {shieldName} and goes no further.",
       "{defender} angles {defender}'s {shieldName} to catch the {attack} — the pressure skitters off harmlessly.",
       "A well-placed {shieldName} and the {attack}'s whisper is completely neutralized.",
-      "{defender} takes the unsettling {attack} on {defender}'s {shieldName} and gives nothing back.",
+      "{defender} takes the gnawing {attack} on {defender}'s {shieldName} and gives nothing back.",
       "{attacker}'s {attack} deliver{vs} real pressure, but {defender}'s {shieldName} has carried worse."
     ]
   },
@@ -1365,7 +1365,7 @@
       "The {attack}'s force meets {spellName}'s force. {spellName} wins.",
       "The {attack} hammers {spellName}'s invisible barrier and expends itself entirely.",
       "Even the {attack}'s raw arcane force cannot breach {spellName}'s protection. Not today.",
-      "An invisible barrier surges around {defender} — {spellName} swallows the invisible {attack} entirely.",
+      "An invisible barrier surges around {defender} — {spellName} swallows the silent {attack} entirely.",
       "The force of the {attack} strikes {spellName}'s barrier and stops dead.",
       "{spellName} intercepts the {attack} before its surge can reach {defender}.",
       "Magical protection has no trouble with this kind of pressure — {spellName} holds.",
@@ -1376,7 +1376,7 @@
       "{spellName} extends its protection to the mental realm — the {attack} finds no entry.",
       "Magical warding bends the {attack} away from {defender}'s mind.",
       "The {attack} rushes in and finds {spellName} already waiting for it.",
-      "An invisible barrier surges around {defender} — {spellName} swallows the intrusive {attack} entirely.",
+      "An invisible barrier surges around {defender} — {spellName} swallows the prying {attack} entirely.",
       "The dread of the {attack} strikes {spellName}'s barrier and stops dead.",
       "{spellName} intercepts the {attack} before its pressure can reach {defender}.",
       "Magical protection has no trouble with this kind of whisper — {spellName} holds.",
@@ -1515,7 +1515,7 @@
       "{attacker}'s {attack} deliver{vs} real radiance, but bark has weathered worse than this."
     ],
     "force": [
-      "The invisible {attack} scrape{vs} across {defender}'s bark-hardened skin — {spellName} holds firm.",
+      "The silent {attack} scrape{vs} across {defender}'s bark-hardened skin — {spellName} holds firm.",
       "{spellName} has made {defender}'s skin as tough as old wood. The force proves it.",
       "Bark doesn't give way for this kind of surge. {spellName} has made {defender} bark.",
       "The {attack}'s pressure lands against what feels like hitting a tree. {spellName} does that.",
@@ -1523,7 +1523,7 @@
       "{attacker}'s {attack} deliver{vs} real surge, but bark has weathered worse than this."
     ],
     "psychic": [
-      "The intrusive {attack} scrape{vs} across {defender}'s bark-hardened skin — {spellName} holds firm.",
+      "The prying {attack} scrape{vs} across {defender}'s bark-hardened skin — {spellName} holds firm.",
       "{spellName} has made {defender}'s skin as tough as old wood. The dread proves it.",
       "Bark doesn't give way for this kind of pressure. {spellName} has made {defender} bark.",
       "The {attack}'s whisper lands against what feels like hitting a tree. {spellName} does that.",
@@ -1645,7 +1645,7 @@
       "Some protection {attacker} hadn't anticipated turns the radiance aside entirely."
     ],
     "force": [
-      "{defender} is protected by forces unseen — the invisible {attack} fall{vs} just short.",
+      "{defender} is protected by forces unseen — the silent {attack} fall{vs} just short.",
       "Something stops the {attack}'s force that {attacker} can't quite account for.",
       "An unseen force deflects the surge at the last moment.",
       "{defender} shrugs off the pressure through means {attacker} can't easily explain.",
@@ -1653,7 +1653,7 @@
       "Some protection {attacker} hadn't anticipated turns the surge aside entirely."
     ],
     "psychic": [
-      "{defender} is protected by forces unseen — the intrusive {attack} fall{vs} just short.",
+      "{defender} is protected by forces unseen — the prying {attack} fall{vs} just short.",
       "Something stops the {attack}'s dread that {attacker} can't quite account for.",
       "An unseen force deflects the pressure at the last moment.",
       "{defender} shrugs off the whisper through means {attacker} can't easily explain.",
