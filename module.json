@@ -26,5 +26,6 @@
   "scripts": [
     "scripts/hit-attribution.js"
   ],
-  "manifest": "https://raw.githubusercontent.com/BojanDimitrovski1710/Sigh-s-Hit-Attribution-Module/main/module.json"
+  "manifest": "https://raw.githubusercontent.com/BojanDimitrovski1710/Sigh-s-Hit-Attribution-Module/main/module.json",
+  "download": "https://github.com/BojanDimitrovski1710/Sigh-s-Hit-Attribution-Module/releases/download/release-v.1.0.0/module.zip"
 }
