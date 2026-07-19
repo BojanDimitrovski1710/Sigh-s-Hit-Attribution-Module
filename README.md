@@ -46,6 +46,9 @@ tailored to what actually stopped the hit:
   noun like "arrow" or "bolt" instead of the weapon's own name.
 - Automatically adjusts grammar (goes/go, is/are, was/were) depending on
   whether the resolved attack name is singular or plural (Bite vs. Claws).
+- Damage-type adjectives ("keen-edged", "crushing", "searing", ...) are drawn
+  at random from a per-damage-type word bank instead of being hardcoded into
+  each template, so the same line doesn't always use the same adjective.
 - All flavor lines live in `lang/en.json` as randomized pools, so the same
   miss doesn't read the same way twice.
 - Chat card styling (colors, opacity, whether the "Roll X vs AC Y" line is
