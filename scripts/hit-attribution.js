@@ -46,6 +46,15 @@ Hooks.on("init", () => {
         default: true,
     });
 
+    game.settings.register(MODULE_ID, "simpleResponses", {
+        name: "Simple Responses mode",
+        hint: "Skip the narrative flavor text and just state the attack used and which AC layer stopped it (or that it fumbled).",
+        scope:  "world",
+        config: true,
+        type:   Boolean,
+        default: false,
+    });
+
     game.settings.register(MODULE_ID, "bgColor", {
         name: "Background color",
         hint: "Background color of the chat message.",
@@ -532,6 +541,20 @@ function resolveAttackName(options) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// SIMPLE NARRATIVE BUILDER
+// Used when "Simple Responses" mode is on. Skips the random flavor pool
+// and just states the attack and which AC layer stopped it (or fumble).
+// ─────────────────────────────────────────────────────────────
+function buildSimpleNarrative(layer, tokens, layerLabel) {
+    const subject = `${tokens.attacker}'s <b>${tokens.attack}</b>`;
+
+    if (layer.key === "fumble") {
+        return `${subject} ${tokens.isAre} a complete miss (fumble).`;
+    }
+    return `${subject} ${tokens.isAre} stopped by <b>${layerLabel}</b>.`;
+}
+
+// ─────────────────────────────────────────────────────────────
 // FLAVOR HTML BUILDER
 // ─────────────────────────────────────────────────────────────
 function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, layer, defenderActor, damageType, range) {
@@ -563,7 +586,12 @@ function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, laye
     const langKey  = getLangKey(layer);
     dbg("Flavor lookup — langKey:", langKey, "| damageType:", damageType, "| range:", range);
 
-    const narrative = pickFlavor(langKey, damageType, range, tokens);
+    const layerLabel     = layer.armorName ?? layer.shieldName ?? layer.spellName ?? layer.key;
+    const simpleResponses = game.settings.get(MODULE_ID, "simpleResponses");
+
+    const narrative = simpleResponses
+        ? buildSimpleNarrative(layer, tokens, layerLabel)
+        : pickFlavor(langKey, damageType, range, tokens);
 
     // ── Styling ───────────────────────────────────────────────
     const showRollInfo = game.settings.get(MODULE_ID, "showRollInfo");
@@ -579,8 +607,6 @@ function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, laye
     const g   = parseInt(hex.substring(2, 4), 16);
     const b   = parseInt(hex.substring(4, 6), 16);
     const bg  = `rgba(${r}, ${g}, ${b}, ${bgOpacity})`;
-
-    const layerLabel = layer.armorName ?? layer.shieldName ?? layer.spellName ?? layer.key;
 
     const rollLine = showRollInfo ? `
         <div style="font-size:0.8em; color:${subTextColor}; margin-top:3px; font-style:normal;">

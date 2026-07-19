@@ -127,6 +127,7 @@ Settings → Sigh's Hit Attribution** (world scope — GM only):
 |------------------------------|----------------------------------------------------------------------|-----------|
 | Enable console debugging     | Logs detailed per-roll info (AC effects, parsed formulas, resolved layers) to the browser console (F12) | off |
 | Show roll vs AC line         | Toggles the small "Roll X vs AC Y · stopped by: ..." line under the flavor text | on |
+| Simple Responses mode         | Skips the random narrative flavor text; states only the attack used and which AC layer stopped it (or that it fumbled) | off |
 | Background color             | Chat card background color                                          | `#500000` |
 | Background opacity           | Chat card background opacity (0–1)                                  | `0.75`    |
 | Text color                   | Main narrative text color                                           | `#ffffff` |
