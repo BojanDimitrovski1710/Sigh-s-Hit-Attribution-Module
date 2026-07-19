@@ -478,6 +478,18 @@ function pickFlavor(langKey, damageType, range, tokens) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// DAMAGE-TYPE ADJECTIVE PICKER
+// Looks up lang.adjectives[damageType] and returns one random entry.
+// Backs the {dtAdj} token so templates don't all hardcode the same word
+// (e.g. every slashing line saying "keen-edged").
+// ─────────────────────────────────────────────────────────────
+function pickAdjective(damageType) {
+    const pool = damageType ? LANG_DATA?.adjectives?.[damageType] : null;
+    if (!pool?.length) return "";
+    return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ─────────────────────────────────────────────────────────────
 // ATTACK NAME RESOLVER
 // Converts ammo-using weapon attacks into a more natural noun like
 // "arrow" or "bolt" for flavor text instead of the weapon name.
@@ -574,6 +586,7 @@ function buildFlavorHTML(rollTotal, attackerName, attackName, defenderName, laye
         dexMod:      dexMod,
         abilityMod:  layer.mod        ?? "",
         abilityAbbr: layer.abbr       ?? "",
+        dtAdj:       pickAdjective(damageType),
         // Grammar helpers — use in lang file to keep sentences correct for
         // both singular ("Bite goes") and plural ("Claws go") attack names.
         vs:      isPlural ? ""     : "s",   // "go{vs}"     → goes / go
