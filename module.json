@@ -7,6 +7,17 @@
     "minimum": "13",
     "verified": "13"
   },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.0.0"
+        }
+      }
+    ]
+  },
   "authors": [
     {
       "name": "Sigh"
@@ -14,5 +25,6 @@
   ],
   "scripts": [
     "scripts/hit-attribution.js"
-  ]
+  ],
+  "manifest": "https://raw.githubusercontent.com/BojanDimitrovski1710/Sigh-s-Hit-Attribution-Module/main/module.json"
 }
